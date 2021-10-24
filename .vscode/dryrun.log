@@ -1,0 +1,5 @@
+make tater-chip-8 --dry-run --keep-going --print-directory
+make: Entering directory '/home/kyle/clones/tater-chip-8'
+make: 'tater-chip-8' is up to date.
+make: Leaving directory '/home/kyle/clones/tater-chip-8'
+ 

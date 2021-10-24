@@ -1,0 +1,10 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/kyle/clones/tater-chip-8",
+            "binaryPath": "/home/kyle/clones/tater-chip-8/tater-chip-8",
+            "binaryArgs": []
+        }
+    ]
+}
