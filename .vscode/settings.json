@@ -6,5 +6,8 @@
             "binaryPath": "/home/kyle/clones/tater-chip-8/tater-chip-8",
             "binaryArgs": []
         }
-    ]
+    ],
+    "files.associations": {
+        "chrono": "cpp"
+    }
 }

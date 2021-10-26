@@ -27,15 +27,19 @@ bool Chip8::Load()
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8::Execute()
-{
+{    
     while (true)
-    {
+    {        
+    
         // get the next instruction
         uint16_t instruction = FetchNextInstruction();
 
         // sleep for some number of milliseconds before attempting to execute 
         // the next instruction
         std::this_thread::sleep_for(theBetweenInstructionWaitTimeMs);
+
+        theDelayTimer.Run();
+        theSoundTimer.Run();
     }
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

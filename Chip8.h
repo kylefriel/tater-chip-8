@@ -1,6 +1,11 @@
 #include <cstdint>
 #include <stack>
 #include "Timer.h"
+#include "SoundTimer.h"
+#include "Display.h"
+
+#ifndef _CHIP8_
+#define _CHIP8_
 
 class Chip8
 {
@@ -30,10 +35,12 @@ class Chip8
         std::stack<uint16_t> theStack;
 
         Timer theDelayTimer;
-
-        Timer theSoundTimer;
+        SoundTimer theSoundTimer;
+        
+        Display theDisplay;
 
         // amount of time to sleep (in milliseconds) before executing the next instruction
         //const uint16_t theBetweenInstructionWaitTimeMs;   
         std::chrono::milliseconds theBetweenInstructionWaitTimeMs;
 };
+#endif
