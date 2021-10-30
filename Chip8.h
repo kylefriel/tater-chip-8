@@ -13,6 +13,8 @@
 #define FONTS_SIZE   0x0050
 #define FONTS_START  0x0050
 
+#define NUM_VARIABLE_REGISTERS 0x10
+
 class Chip8
 {
     public:
@@ -39,13 +41,16 @@ class Chip8
 
     // protected members here
     protected:        
-
-        std::stack<uint16_t> theStack;
-
+        
         Timer theDelayTimer;
         SoundTimer theSoundTimer;        
+        Display theDisplay;            
+        
+        std::stack<uint16_t> theStack;
+        uint16_t theProgramCounter;
+        uint16_t theIndexRegister;        
+        std::array <uint16_t, NUM_VARIABLE_REGISTERS> theVariableRegisters;
         std::array <uint16_t, MEM_SIZE> theMemory;
-        Display theDisplay;
 
         // amount of time to sleep (in milliseconds) before executing the next instruction
         //const uint16_t theBetweenInstructionWaitTimeMs;   

@@ -9,7 +9,8 @@ const std::chrono::milliseconds default_sleep_time_ms(2); // default is 2ms
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8()
-    :theBetweenInstructionWaitTimeMs(default_sleep_time_ms)
+    :theBetweenInstructionWaitTimeMs(default_sleep_time_ms),
+     theProgramCounter(PROGAM_START)
 {
     InitializeMemory();
 }
@@ -17,7 +18,8 @@ Chip8::Chip8()
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8(uint16_t sleepTimeMs)
-    :theBetweenInstructionWaitTimeMs(sleepTimeMs)
+    :theBetweenInstructionWaitTimeMs(sleepTimeMs),
+     theProgramCounter(PROGAM_START)
 {
     InitializeMemory();
 }
@@ -36,6 +38,7 @@ bool Chip8::LoadFromFile(std::string file)
 
     char c[sizeof(uint16_t)];
     int i = PROGAM_START;
+    // copy the entire rom into memory (16 bits at a time) at the predefined location
     while (f.read(c, sizeof(uint16_t)) && i < MEM_SIZE)
     {        
         theMemory[i++] = (static_cast<uint16_t>(c[0] << 8) | static_cast<uint8_t>(c[1]));        
