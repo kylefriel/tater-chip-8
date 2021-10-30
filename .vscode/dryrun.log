@@ -1,5 +1,6 @@
 make tater-chip-8 --dry-run --keep-going --print-directory
 make: Entering directory '/home/kyle/clones/tater-chip-8'
+g++    -c -o main.o main.cpp
 g++    -c -o Chip8.o Chip8.cpp
 g++    -c -o Timer.o Timer.cpp
 g++    -c -o SoundTimer.o SoundTimer.cpp

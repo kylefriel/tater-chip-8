@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string>
+#include "Chip8.h"
 
 int main(int argc, char* argv[])
 {
@@ -8,5 +10,15 @@ int main(int argc, char* argv[])
         return 0;
     }
 
+    std::string filename = argv[1];
+
+    Chip8 emulator;
+    if (!emulator.LoadFromFile(filename))
+    {
+        printf ("failed to load rom file %s\n", filename.c_str());
+        return 0;
+    }
+
+    //emulator.Execute();
     return 0;
 }
