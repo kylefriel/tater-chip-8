@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Chip8.h"
+#include "instructions/InstructionBase.h"
 
 const std::chrono::milliseconds default_sleep_time_ms(2); // default is 2ms
 
@@ -55,8 +56,17 @@ void Chip8::Execute()
 {    
     while (true)
     {            
-        // get the next instruction
-        uint16_t instruction = FetchNextInstruction();
+        // get the next instruction and increment the program counter
+        uint16_t opcode = theMemory[theProgramCounter++];
+
+        // get the correct instruction object to perform the execution
+        InstructionBase* instruction = theInstructionFactory.GetInstruction(opcode);
+
+        if (0 != instruction)
+        {
+            instruction->Execute(this);
+            delete instruction;
+        }
 
         // sleep for some number of milliseconds before attempting to execute 
         // the next instruction
@@ -65,27 +75,6 @@ void Chip8::Execute()
         theDelayTimer.Run();
         theSoundTimer.Run();
     }
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-uint16_t Chip8::FetchNextInstruction()
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Chip8::DecodeInstruction()
-{
-
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Chip8::ExecuteInstruction()
-{
-
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

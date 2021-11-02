@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Oct 30 11:27:13 2021
+# Make data base, printed on Mon Nov  1 19:44:17 2021
 
 # Variables
 
@@ -18,10 +18,13 @@ make: *** No rule to make target 'all'.  Stop.
 ?F = $(notdir $?)
 # environment
 DESKTOP_SESSION = xubuntu
+ 
 # default
 .SHELLFLAGS := -c
 # environment
 XDG_SESSION_CLASS = user
+# makefile (from 'Makefile', line 5)
+SRC = main.cpp Chip8.cpp Timer.cpp SoundTimer.cpp Display.cpp InstructionFactory.cpp instructions/InstructionBase.cpp instructions/ClearScreen.cpp
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -43,11 +46,9 @@ SHELL = /bin/sh
 # environment
 GDM_LANG = en_US
 # environment
-VTE_VERSION = 6003
-# environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-_ = /usr/bin/code
+_ = /usr/share/code/code
 # makefile (from 'Makefile', line 2)
 CFLAGS = -I.
 # environment
@@ -55,6 +56,7 @@ XDG_CONFIG_DIRS = /etc/xdg/xdg-xubuntu:/etc/xdg:/etc/xdg
 # environment
 GTK_OVERLAY_SCROLLING = 0
 # makefile (from 'Makefile', line 1)
+ 
 MAKEFILE_LIST :=  Makefile
 # automatic
 @F = $(notdir $@)
@@ -66,8 +68,12 @@ XDG_DATA_DIRS = /usr/share/xubuntu:/usr/share/xfce4:/usr/local/share:/usr/share:
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
+# makefile (from 'Makefile', line 14)
+OBJS = $(SRC:.cpp=.o)		
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
+# makefile (from 'Makefile', line 3)
+APP = tater-chip-8
 # environment
 VSCODE_CWD = /home/kyle
 # environment
@@ -79,11 +85,9 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Xubuntu-VirtualBox:@/tmp/.ICE-unix/715,unix/Xubuntu-VirtualBox:/tmp/.ICE-unix/715
+SESSION_MANAGER = local/Xubuntu-VirtualBox:@/tmp/.ICE-unix/716,unix/Xubuntu-VirtualBox:/tmp/.ICE-unix/716
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
-# environment
-WINDOWID = 60817411
 # environment
 XDG_MENU_PREFIX = xfce-
 # environment
@@ -95,7 +99,7 @@ VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"
 # environment
 XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/kyle
 # environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+LS_COLORS = 
 # environment
 XDG_SESSION_DESKTOP = xubuntu
 # environment
@@ -115,7 +119,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 798
+SSH_AGENT_PID = 799
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # environment
@@ -125,15 +129,11 @@ HOME = /home/kyle
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
-VSCODE_CLI = 1
-# environment
 VSCODE_CODE_CACHE_PATH = /home/kyle/.config/Code/CachedData/6cba118ac49a1b88332f312a8f67186f7f3c1643
 # environment
 LOGNAME = kyle
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -144,18 +144,16 @@ XDG_VTNR = 7
 CLUTTER_BACKEND = x11
 # environment
 MAKELEVEL := 0
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
+SHLVL = 0
 # makefile (from 'Makefile', line 1)
 CC = g++
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-25bfe2d1-97b9-457b-9234-dfd983635818.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-7f81a22f-e8bd-4b24-9c31-a5485db3af33.sock
 # environment
 XDG_SESSION_ID = c1
 # environment
@@ -178,8 +176,6 @@ LANGUAGE = en_US
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-aef48fbd-1.61.2-main.sock
-# environment
-PANEL_GDK_CORE_DEVICE_EVENTS = 0
 # makefile
 MAKEFLAGS = pqrR
 # environment
@@ -217,11 +213,9 @@ CHROME_DESKTOP = code-url-handler.desktop
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
-VSCODE_PID = 1208
+VSCODE_PID = 1169
 # variable set hash-table stats:
-# Load=104/1024=10%, Rehash=0, Collisions=11/129=9%
+# Load=100/1024=10%, Rehash=0, Collisions=10/128=8%
 
 # Pattern-specific Variable Values
 
@@ -229,9 +223,9 @@ VSCODE_PID = 1208
 
 # Directories
 
-# . (device 2053, inode 393872): 17 files, no impossibilities.
+# . (device 2053, inode 393872): 27 files, no impossibilities.
 
-# 17 files, no impossibilities in 1 directories.
+# 27 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -240,28 +234,41 @@ VSCODE_PID = 1208
 # Files
 
 # Not a target:
+instructions/ClearScreen.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 all:
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has not been updated.
 
-tater-chip-8: main.o Chip8.o Timer.o SoundTimer.o Display.o
+tater-chip-8: main.o Chip8.o Timer.o SoundTimer.o Display.o InstructionFactory.o instructions/InstructionBase.o instructions/ClearScreen.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 5):
-	$(CC) -o tater-chip-8 main.o Chip8.o Timer.o SoundTimer.o Display.o
+#  recipe to execute (from 'Makefile', line 17):
+	$(CC) -o $(APP) $(OBJS)
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-30 11:27:00.230217072
+ 
+#  Last modified 2021-11-01 19:42:51.279977731
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 .DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+instructions/InstructionBase.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -276,10 +283,8 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 8):
-	rm *.o 
-	rm tater-chip-8
- 
+#  recipe to execute (from 'Makefile', line 20):
+	rm -f $(OBJS) $(APP)
 
 # Not a target:
 Display.o:
@@ -305,20 +310,26 @@ Chip8.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+InstructionFactory.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=11/1024=1%, Rehash=0, Collisions=0/26=0%
+# Load=14/1024=1%, Rehash=0, Collisions=1/32=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 29 / storage = 271 B / avg = 9 B
-# current buf: size = 8162 B / used = 271 B / count = 29 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 35 / storage = 407 B / avg = 11 B
+# current buf: size = 8162 B / used = 407 B / count = 35 / avg = 11 B
 
-# strcache performance: lookups = 35 / hit rate = 17%
+# strcache performance: lookups = 48 / hit rate = 27%
 # hash-table stats:
-# Load=29/8192=0%, Rehash=0, Collisions=1/35=3%
-# Finished Make data base on Sat Oct 30 11:27:13 2021
+# Load=35/8192=0%, Rehash=0, Collisions=1/48=2%
+# Finished Make data base on Mon Nov  1 19:44:17 2021
 
  

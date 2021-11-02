@@ -1,14 +1,15 @@
-#include "instructions/InstructionBase.h"
-#include "InstructionFactory.h"
+#include "../Chip8.h"
+#include "ClearScreen.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionFactory::InstructionFactory()
+ClearScreen::ClearScreen()
 {
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::GetInstruction(uint16_t opcode)
+void ClearScreen::Execute(Chip8* chip8)
 {
-    return 0;
+    chip8->GetDisplay().ClearScreen();
 }
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,9 +1,36 @@
 CC=g++
-CFLAGS=-I.
+CFLAGS=-I. -c
+APP=tater-chip-8
+OBJDIR=obj
 
-tater-chip-8: main.o Chip8.o Timer.o SoundTimer.o Display.o
-	$(CC) -o tater-chip-8 main.o Chip8.o Timer.o SoundTimer.o Display.o
+SRC = 	Chip8.cpp \
+		Timer.cpp \
+		SoundTimer.cpp \
+		Display.cpp \
+		InstructionFactory.cpp \
+		instructions/InstructionBase.cpp \
+		instructions/ClearScreen.cpp \
+		main.cpp \
+
+OBJS =	$(SRC:%.cpp=$(OBJDIR)/%.o)		
+
+build: $(APP)
 
 clean:
-	rm *.o 
-	rm tater-chip-8
+	rm -f $(OBJS) $(APP)
+
+$(APP):$(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
+
+$(OBJS): $(OBJDIR)/%.o: %.cpp
+	@mkdir -p $(@D)	 
+	$(CC) $(CFLAGS) -o $@ $<
+
+
+
+
+
+
+
+
+

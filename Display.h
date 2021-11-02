@@ -10,8 +10,9 @@ class Display
 {    
     public:
 
-        Display();        
-        void Draw();
+        Display();
+        void Draw(uint16_t x, uint16_t y, uint16_t n);
+        void ClearScreen();
 
     // protected methods here
     protected:        
