@@ -1,6 +1,7 @@
 #include <cstdint>
 #include <stack>
 #include <string>
+#include <array>
 #include "Timer.h"
 #include "SoundTimer.h"
 #include "Display.h"

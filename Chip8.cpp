@@ -53,7 +53,13 @@ bool Chip8::LoadFromFile(std::string file)
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8::Execute()
-{    
+{            
+    if (!theDisplay.Initialize())
+    {
+        printf ("failed to initialize graphics\n");
+        return;
+    }          
+
     while (true)
     {            
         // get the next instruction and increment the program counter

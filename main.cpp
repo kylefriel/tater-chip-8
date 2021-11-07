@@ -19,6 +19,6 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    //emulator.Execute();
+    emulator.Execute();
     return 0;
 }
