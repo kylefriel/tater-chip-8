@@ -4,7 +4,7 @@
 #include <array>
 #include "Timer.h"
 #include "SoundTimer.h"
-#include "Display.h"
+#include "Chip8Display.h"
 #include "InstructionFactory.h"
 
 #ifndef _CHIP8_
@@ -33,7 +33,14 @@ class Chip8
     public:
 
         // accessor methods
-        Display& GetDisplay() {return theDisplay;}
+        Chip8Display& GetDisplay() {return theDisplay;}
+
+        // get and set registers
+        uint16_t GetVReg(uint16_t r);
+        void SetVReg(uint16_t r, uint16_t v);
+
+        uint16_t GetFlagReg() {return theFlagRegister;}
+        void SetFlagReg(uint16_t r) {theFlagRegister = r;}
 
     // protected methods here
     protected:
@@ -45,12 +52,13 @@ class Chip8
         
         Timer theDelayTimer;
         SoundTimer theSoundTimer;        
-        Display theDisplay;            
+        Chip8Display theDisplay;            
         
         std::stack<uint16_t> theStack;
         uint16_t theProgramCounter;
         uint16_t theIndexRegister;        
         std::array <uint16_t, NUM_VARIABLE_REGISTERS> theVariableRegisters;
+        uint16_t theFlagRegister;
         std::array <uint16_t, MEM_SIZE> theMemory;
 
         // amount of time to sleep (in milliseconds) before executing the next instruction

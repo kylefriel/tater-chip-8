@@ -1,19 +1,19 @@
-#include "Display.h"
+#include "Chip8Display.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Display::Display()
+Chip8Display::Chip8Display()
 {    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Display::~Display()
+Chip8Display::~Chip8Display()
 {    
     SDL_DestroyWindow(theWindow);
     SDL_Quit();
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-bool Display::Initialize()
+bool Chip8Display::Initialize()
 {    
     if (0 != SDL_Init(SDL_INIT_EVERYTHING))
     {        
@@ -45,7 +45,7 @@ bool Display::Initialize()
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Display::Draw(uint16_t x, uint16_t y, uint16_t n)
+void Chip8Display::Draw(uint16_t x, uint16_t y, uint16_t n)
 {
     // @todo implement drawing algorithm
 
@@ -54,7 +54,7 @@ void Display::Draw(uint16_t x, uint16_t y, uint16_t n)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Display::UpdateDisplay(bool clear)
+void Chip8Display::UpdateDisplay(bool clear)
 {
     if (clear)
     {
@@ -75,7 +75,7 @@ void Display::UpdateDisplay(bool clear)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Display::ClearScreen()
+void Chip8Display::ClearScreen()
 {
     // clear all of the display points   
     using namespace std;
@@ -89,7 +89,7 @@ void Display::ClearScreen()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-std::vector<SDL_Point> Display::ConvertGridToPoints()
+std::vector<SDL_Point> Chip8Display::ConvertGridToPoints()
 {
     std::vector<SDL_Point> points;
 

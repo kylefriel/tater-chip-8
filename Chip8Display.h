@@ -2,22 +2,22 @@
 #include <vector>
 #include <SDL.h>
 
-#ifndef _DISPLAY_
-#define _DISPLAY_
+#ifndef _CHIP8DISPLAY_
+#define _CHIP8DISPLAY_
 
 #define DISPLAY_WIDTH       64
 #define DISPLAY_HEIGHT      32
 #define PIXEL_SCALE_FACTOR  10
 
-class Display
+class Chip8Display
 {    
     public:
 
-        Display();
-        ~Display();
+        Chip8Display();
+        ~Chip8Display();
         bool Initialize();
         void Draw(uint16_t x, uint16_t y, uint16_t n);        
-        void ClearScreen();
+        void ClearScreen();        
 
     // protected methods here
     protected:        

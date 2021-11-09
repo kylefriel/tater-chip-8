@@ -7,10 +7,11 @@ OBJDIR=obj
 SRC = Chip8.cpp \
       Timer.cpp \
       SoundTimer.cpp \
-      Display.cpp \
+      Chip8Display.cpp \
       InstructionFactory.cpp \
       instructions/InstructionBase.cpp \
       instructions/ClearScreen.cpp \
+      instructions/Display.cpp \
       main.cpp		
 
 OBJS = $(SRC:%.cpp=$(OBJDIR)/%.o)		
@@ -26,6 +27,7 @@ $(APP):$(OBJS)
 $(OBJS): $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
+
 
 
 

@@ -11,8 +11,10 @@ const std::chrono::milliseconds default_sleep_time_ms(2); // default is 2ms
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8()
     :theBetweenInstructionWaitTimeMs(default_sleep_time_ms),
-     theProgramCounter(PROGAM_START)
+     theProgramCounter(PROGAM_START),
+     theFlagRegister(0)
 {
+    std::fill(std::begin(theVariableRegisters), std::end(theVariableRegisters), 0);
     InitializeMemory();
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -20,8 +22,10 @@ Chip8::Chip8()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8(uint16_t sleepTimeMs)
     :theBetweenInstructionWaitTimeMs(sleepTimeMs),
-     theProgramCounter(PROGAM_START)
+     theProgramCounter(PROGAM_START),
+     theFlagRegister(0)
 {
+    std::fill(std::begin(theVariableRegisters), std::end(theVariableRegisters), 0);
     InitializeMemory();
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,5 +115,34 @@ void Chip8::InitializeMemory()
 
     // copy the fonts into the memory at the predefined location
     std::copy(std::begin(fonts), std::end(fonts), std::begin(theMemory) + FONTS_START);
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+uint16_t Chip8::GetVReg(uint16_t r)
+{    
+    try
+    {
+        return theVariableRegisters.at(r);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        return 0;
+    }    
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+void Chip8::SetVReg(uint16_t r, uint16_t v)
+{
+    try
+    {
+        theVariableRegisters.at(r) = v;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';        
+    }    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
