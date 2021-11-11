@@ -2,6 +2,7 @@
 #include <stack>
 #include <string>
 #include <array>
+#include <vector>
 #include "Timer.h"
 #include "SoundTimer.h"
 #include "Chip8Display.h"
@@ -59,7 +60,7 @@ class Chip8
         uint16_t theIndexRegister;        
         std::array <uint16_t, NUM_VARIABLE_REGISTERS> theVariableRegisters;
         uint16_t theFlagRegister;
-        std::array <uint16_t, MEM_SIZE> theMemory;
+        std::array <uint16_t, MEM_SIZE> theMemory;        
 
         // amount of time to sleep (in milliseconds) before executing the next instruction
         //const uint16_t theBetweenInstructionWaitTimeMs;   

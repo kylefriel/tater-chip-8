@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
- 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Nov  8 19:45:56 2021
+# Make data base, printed on Wed Nov 10 19:34:21 2021
 
 # Variables
 
@@ -83,7 +81,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/Xubuntu-VirtualBox:@/tmp/.ICE-unix/712,unix/Xubuntu-VirtualBox:/tmp/.ICE-unix/712
+SESSION_MANAGER = local/Xubuntu-VirtualBox:@/tmp/.ICE-unix/704,unix/Xubuntu-VirtualBox:/tmp/.ICE-unix/704
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -119,7 +117,7 @@ QT_QPA_PLATFORMTHEME = gtk2
 # environment
 XDG_SEAT = seat0
 # environment
-SSH_AGENT_PID = 795
+SSH_AGENT_PID = 787
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
 # environment
@@ -151,10 +149,9 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 0
 # makefile (from 'Makefile', line 1)
- 
 CC = g++
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-41d54b87-64bf-4b88-9749-508176f9f58a.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-fa48773e-a09e-49cc-b9b2-ba17859a4300.sock
 # environment
 XDG_SESSION_ID = c1
 # environment
@@ -216,7 +213,7 @@ CHROME_DESKTOP = code-url-handler.desktop
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1144
+VSCODE_PID = 1234
 # variable set hash-table stats:
 # Load=102/1024=10%, Rehash=0, Collisions=11/136=8%
 
@@ -281,6 +278,9 @@ obj/main.o: main.cpp
 #  Implicit/static pattern stem: 'main'
 #  Modification time never checked.
 #  File has not been updated.
+ 
+make: *** No rule to make target 'all'.  Stop.
+ 
 #  recipe to execute (from 'Makefile', line 28):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
@@ -295,7 +295,6 @@ tater-chip-8: obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8Display.o obj/In
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
 #  Last modified 2021-11-08 19:45:17.37255277
 #  File has been updated.
 #  Successfully updated.
@@ -425,6 +424,6 @@ obj/instructions/ClearScreen.o: instructions/ClearScreen.cpp
 # strcache performance: lookups = 85 / hit rate = 38%
 # hash-table stats:
 # Load=52/8192=1%, Rehash=0, Collisions=1/85=1%
-# Finished Make data base on Mon Nov  8 19:45:56 2021
+# Finished Make data base on Wed Nov 10 19:34:21 2021
 
  

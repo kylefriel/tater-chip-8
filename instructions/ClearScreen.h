@@ -8,7 +8,7 @@ class ClearScreen: public InstructionBase
     public:
         ClearScreen();
 
-        virtual void Execute(Chip8* chip8);
+        virtual void Execute(Chip8* chip8);        
 };
 
 #endif

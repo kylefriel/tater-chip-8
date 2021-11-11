@@ -49,7 +49,7 @@ bool Chip8::LoadFromFile(std::string file)
         theMemory[i++] = (static_cast<uint16_t>(c[0] << 8) | static_cast<uint8_t>(c[1]));        
     }    
     
-    f.close();
+    f.close();    
 
     return true;
 }
@@ -64,7 +64,7 @@ void Chip8::Execute()
         return;
     }          
 
-    while (true)
+    while (true && theProgramCounter < theMemory.size())
     {            
         // get the next instruction and increment the program counter
         uint16_t opcode = theMemory[theProgramCounter++];
@@ -83,7 +83,7 @@ void Chip8::Execute()
         std::this_thread::sleep_for(theBetweenInstructionWaitTimeMs);
 
         theDelayTimer.Run();
-        theSoundTimer.Run();
+        theSoundTimer.Run();        
     }
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
