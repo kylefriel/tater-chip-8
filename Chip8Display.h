@@ -13,11 +13,15 @@ class Chip8Display
 {    
     public:
 
+        typedef std::array< std::array<bool, DISPLAY_WIDTH>, DISPLAY_HEIGHT> Chip8DisplayGrid;
+
         Chip8Display();
         ~Chip8Display();
         bool Initialize();
-        void Draw(uint16_t x, uint16_t y, uint16_t n);        
-        void ClearScreen();        
+        void Draw() {UpdateDisplay();}
+        void ClearScreen();
+
+        Chip8DisplayGrid& GetDisplayGrid() {return theDisplayGrid;}                    
 
     // protected methods here
     protected:        
@@ -28,10 +32,9 @@ class Chip8Display
     // protected members here
     protected:          
 
-        std::array< std::array<bool, DISPLAY_WIDTH>, DISPLAY_HEIGHT> theDisplayGrid;
+        Chip8DisplayGrid theDisplayGrid;
 
         SDL_Window* theWindow;
-        SDL_Renderer* theRenderer;
-        //std::vector<SDL_Point> theDisplayPoints;
+        SDL_Renderer* theRenderer;        
 };
 #endif

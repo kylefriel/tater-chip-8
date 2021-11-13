@@ -45,15 +45,6 @@ bool Chip8Display::Initialize()
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Chip8Display::Draw(uint16_t x, uint16_t y, uint16_t n)
-{
-    // @todo implement drawing algorithm
-
-    UpdateDisplay();
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8Display::UpdateDisplay(bool clear)
 {
     if (clear)

@@ -36,12 +36,23 @@ class Chip8
         // accessor methods
         Chip8Display& GetDisplay() {return theDisplay;}
 
-        // get and set registers
-        uint16_t GetVReg(uint16_t r);
-        void SetVReg(uint16_t r, uint16_t v);
+        // get and set variable registers
+        uint8_t GetVReg(uint16_t r);
+        void SetVReg(uint16_t r, uint8_t v);
 
+        // get and set index register
+        uint16_t GetIReg() {return theIndexRegister;}
+        void SetIReg(uint16_t v) {theIndexRegister = v;}
+
+        // get and set the flag register
         uint16_t GetFlagReg() {return theFlagRegister;}
-        void SetFlagReg(uint16_t r) {theFlagRegister = r;}
+        void SetFlagReg(uint16_t v) {theFlagRegister = v;}
+
+        // set the program counter
+        void SetProgramCounter(uint16_t pc) {theProgramCounter = pc;}
+
+        // get memory at an address
+        uint16_t GetMemory(uint16_t address);
 
     // protected methods here
     protected:
@@ -58,9 +69,9 @@ class Chip8
         std::stack<uint16_t> theStack;
         uint16_t theProgramCounter;
         uint16_t theIndexRegister;        
-        std::array <uint16_t, NUM_VARIABLE_REGISTERS> theVariableRegisters;
+        std::array <uint8_t, NUM_VARIABLE_REGISTERS> theVariableRegisters;
         uint16_t theFlagRegister;
-        std::array <uint16_t, MEM_SIZE> theMemory;        
+        std::array <uint8_t, MEM_SIZE> theMemory;        
 
         // amount of time to sleep (in milliseconds) before executing the next instruction
         //const uint16_t theBetweenInstructionWaitTimeMs;   

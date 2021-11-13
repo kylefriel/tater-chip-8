@@ -34,20 +34,20 @@ Chip8::Chip8(uint16_t sleepTimeMs)
 bool Chip8::LoadFromFile(std::string file)
 {
     using namespace std;
-    ifstream f (file, ios::binary);
+    fstream f (file, fstream::in | fstream::binary);
 
     if (!f)
     {
         return false;
     }
 
-    char c[sizeof(uint16_t)];
-    int i = PROGAM_START;
-    // copy the entire rom into memory (16 bits at a time) at the predefined location
-    while (f.read(c, sizeof(uint16_t)) && i < MEM_SIZE)
-    {        
-        theMemory[i++] = (static_cast<uint16_t>(c[0] << 8) | static_cast<uint8_t>(c[1]));        
-    }    
+    f.read(reinterpret_cast<char*>(theMemory.data() + PROGAM_START), theMemory.size() - PROGAM_START);
+    
+    // for (int i = 0 ; i < theMemory.size() ; i+=2)
+    // {        
+    //     if (0 != theMemory[i] || 0 != theMemory[i+1])
+    //         printf ("i=%x: %02x%02x\n", i, theMemory[i], theMemory[i+1]);
+    // }    
     
     f.close();    
 
@@ -67,15 +67,17 @@ void Chip8::Execute()
     while (true && theProgramCounter < theMemory.size())
     {            
         // get the next instruction and increment the program counter
-        uint16_t opcode = theMemory[theProgramCounter++];
+        //uint16_t opcode = theMemory[theProgramCounter++];
+        uint16_t opcode = (theMemory[theProgramCounter] << 8) | theMemory[theProgramCounter+1];
+        theProgramCounter += 2;        
 
         // get the correct instruction object to perform the execution
-        InstructionBase* instruction = theInstructionFactory.GetInstruction(opcode);
+        std::shared_ptr<InstructionBase> instruction = theInstructionFactory.GetInstruction(opcode);
 
         if (0 != instruction)
-        {
-            instruction->Execute(this);
-            delete instruction;
+        {            
+            printf ("opcode=%04x\n", opcode);
+            //instruction->Execute(this);            
         }
 
         // sleep for some number of milliseconds before attempting to execute 
@@ -91,7 +93,7 @@ void Chip8::Execute()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8::InitializeMemory()
 {
-    theMemory.fill(0x0000);
+    theMemory.fill(0);
 
     // define the fonts
     std::array <uint16_t, FONTS_SIZE> fonts = {
@@ -119,7 +121,7 @@ void Chip8::InitializeMemory()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-uint16_t Chip8::GetVReg(uint16_t r)
+uint8_t Chip8::GetVReg(uint16_t r)
 {    
     try
     {
@@ -134,7 +136,7 @@ uint16_t Chip8::GetVReg(uint16_t r)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Chip8::SetVReg(uint16_t r, uint16_t v)
+void Chip8::SetVReg(uint16_t r, uint8_t v)
 {
     try
     {
@@ -143,6 +145,21 @@ void Chip8::SetVReg(uint16_t r, uint16_t v)
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';        
+    }    
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+uint16_t Chip8::GetMemory(uint16_t address)
+{
+    try
+    {
+        return theMemory.at(address);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n'; 
+        return 0;       
     }    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

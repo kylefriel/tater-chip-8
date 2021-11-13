@@ -2,6 +2,10 @@
 #include "instructions/InstructionBase.h"
 #include "instructions/ClearScreen.h"
 #include "instructions/Display.h"
+#include "instructions/Jump.h"
+#include "instructions/Set.h"
+#include "instructions/Add.h"
+#include "instructions/SetIndex.h"
 #include "InstructionFactory.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,27 +19,106 @@ InstructionFactory::InstructionFactory()
     theFirstNibbleMap.emplace(0x7, InstructionFactory::Process7);
     theFirstNibbleMap.emplace(0x8, InstructionFactory::Process8);
     theFirstNibbleMap.emplace(0xA, InstructionFactory::ProcessA);
+    theFirstNibbleMap.emplace(0xB, InstructionFactory::ProcessB);
+    theFirstNibbleMap.emplace(0xC, InstructionFactory::ProcessC);
+    theFirstNibbleMap.emplace(0xD, InstructionFactory::ProcessD);
+    theFirstNibbleMap.emplace(0xE, InstructionFactory::ProcessE);
+    theFirstNibbleMap.emplace(0xF, InstructionFactory::ProcessF);
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::GetInstruction(const uint16_t opcode)
+std::shared_ptr<InstructionBase> InstructionFactory::GetInstruction(const uint16_t opcode)
 {
-    uint16_t firstNibble  = (opcode & 0xf000) >> 12;
-    uint16_t secondNibble = (opcode & 0xf00) >> 8;
-    uint16_t thirdNibble  = (opcode & 0xf0) >> 4;
-    uint16_t fourthNibble = (opcode & 0xf);
-
-    if (0 != opcode)
-    {
-        printf ("opcode=%X first=%X, second=%X, thirdf=%X, fourth=%X\n", opcode, firstNibble, secondNibble, thirdNibble, fourthNibble);
+    std::map<uint16_t, InstructionCreateFunc>::iterator it = theFirstNibbleMap.find(FIRST_NIBBLE(opcode));
+    if (it != theFirstNibbleMap.end())
+    {        
+        return ((*it->second)(opcode));
     }
 
     return 0;
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::Process0(const uint16_t opcode)
+std::shared_ptr<InstructionBase> InstructionFactory::Process0(const uint16_t opcode)
+{
+    if (0x00e0 == opcode)
+    {        
+        return (std::shared_ptr<InstructionBase>(new ClearScreen()));
+    }
+    
+    return 0;
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::Process1(const uint16_t opcode)
+{        
+    return std::shared_ptr<InstructionBase>(new Jump(opcode));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::Process3(const uint16_t opcode)
+{
+    return 0;
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::Process6(const uint16_t opcode)
+{        
+    return std::shared_ptr<InstructionBase>(new Set(opcode));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::Process7(const uint16_t opcode)
+{    
+    return std::shared_ptr<InstructionBase>(new Add(opcode));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::Process8(const uint16_t opcode)
+{
+    return 0;
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessA(const uint16_t opcode)
+{
+    return std::shared_ptr<InstructionBase>(new SetIndex(opcode));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessB(const uint16_t opcode)
+{
+    return 0;
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessC(const uint16_t opcode)
+{
+    return 0;
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessD(const uint16_t opcode)
+{    
+    return std::shared_ptr<InstructionBase>(new Display(opcode));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessE(const uint16_t opcode)
 {
     return 0;
 }
@@ -43,122 +126,7 @@ InstructionBase* InstructionFactory::Process0(const uint16_t opcode)
 
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::Process1(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::Process3(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::Process6(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::Process7(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::Process8(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::ProcessA(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::ProcessB(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::ProcessC(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::ProcessD(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::ProcessE(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::ProcessF(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::CreateClearScreen(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::CreateJump(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::CreateSetReg(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::CreateAddValToReg(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::CreateSetIndex(const uint16_t opcode)
-{
-    return 0;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-InstructionBase* InstructionFactory::CreateDisplay(const uint16_t opcode)
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessF(const uint16_t opcode)
 {
     return 0;
 }

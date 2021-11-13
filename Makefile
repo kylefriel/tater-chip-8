@@ -12,6 +12,10 @@ SRC = Chip8.cpp \
       instructions/InstructionBase.cpp \
       instructions/ClearScreen.cpp \
       instructions/Display.cpp \
+      instructions/Jump.cpp \
+      instructions/Set.cpp \
+      instructions/Add.cpp \
+      instructions/SetIndex.cpp \
       main.cpp		
 
 OBJS = $(SRC:%.cpp=$(OBJDIR)/%.o)		
