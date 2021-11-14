@@ -52,7 +52,7 @@ class Chip8
         void SetProgramCounter(uint16_t pc) {theProgramCounter = pc;}
 
         // get memory at an address
-        uint16_t GetMemory(uint16_t address);
+        uint8_t GetMemory(uint16_t address);
 
     // protected methods here
     protected:

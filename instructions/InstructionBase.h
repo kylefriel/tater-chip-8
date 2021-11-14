@@ -1,3 +1,5 @@
+#include <string>
+
 #ifndef _INSTRUCTIONBASE_
 #define _INSTRUCTIONBASE_
 
@@ -15,6 +17,7 @@ class InstructionBase
     public:
         InstructionBase();
         virtual void Execute(Chip8* chip8) = 0;        
+        virtual std::string GetClassName() = 0;
 
     protected:
 };

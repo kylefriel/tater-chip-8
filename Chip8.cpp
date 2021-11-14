@@ -76,8 +76,8 @@ void Chip8::Execute()
 
         if (0 != instruction)
         {            
-            printf ("opcode=%04x\n", opcode);
-            //instruction->Execute(this);            
+            std::cout << "opcode=" << std::hex << opcode << " Executing " + instruction->GetClassName() << std::endl;
+            instruction->Execute(this);            
         }
 
         // sleep for some number of milliseconds before attempting to execute 
@@ -150,7 +150,7 @@ void Chip8::SetVReg(uint16_t r, uint8_t v)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-uint16_t Chip8::GetMemory(uint16_t address)
+uint8_t Chip8::GetMemory(uint16_t address)
 {
     try
     {

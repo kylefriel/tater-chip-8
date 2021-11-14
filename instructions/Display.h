@@ -10,14 +10,19 @@ class Display: public InstructionBase
         Display (uint16_t opcode);
 
         virtual void Execute(Chip8* chip8);
+        virtual std::string GetClassName() {return typeid(*this).name();};
 
     protected:
-        int theXReg;
-        int theYReg;        
-        int theNReg;        
+        bool GetPixelStateFromSprite(uint8_t sprite, uint8_t index);
+    
+    protected:
+        const uint16_t theXReg;
+        const uint16_t theYReg;        
+        const uint8_t thePixelHeight;        
 
     private:
-        Display() {};
+        Display();
+
 };
 
 #endif

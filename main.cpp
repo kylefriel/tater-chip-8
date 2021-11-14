@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 
     std::string filename = argv[1];
 
-    Chip8 emulator(0);
+    Chip8 emulator;
     if (!emulator.LoadFromFile(filename))
     {
         printf ("failed to load rom file %s\n", filename.c_str());

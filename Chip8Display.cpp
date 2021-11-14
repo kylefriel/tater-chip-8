@@ -2,7 +2,8 @@
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8Display::Chip8Display()
-{    
+{   
+    theDisplayGrid = {false}; 
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -57,8 +58,7 @@ void Chip8Display::UpdateDisplay(bool clear)
     {
         std::vector<SDL_Point> points = ConvertGridToPoints();
         SDL_SetRenderDrawColor(theRenderer, 0, 255, 0, SDL_ALPHA_OPAQUE);  
-        SDL_RenderDrawPoints(theRenderer, points.data(), points.size());         
-        SDL_RenderPresent(theRenderer); 
+        SDL_RenderDrawPoints(theRenderer, points.data(), points.size());                 
     }
 
     SDL_RenderPresent(theRenderer);
@@ -69,10 +69,12 @@ void Chip8Display::UpdateDisplay(bool clear)
 void Chip8Display::ClearScreen()
 {
     // clear all of the display points   
-    using namespace std;
-    for (int i = 0 ; i < DISPLAY_HEIGHT ; i++)
-        for (int j = 0 ; j < DISPLAY_WIDTH ; j++)
-            theDisplayGrid[i][j] = false;
+    theDisplayGrid = {false}; 
+
+    // using namespace std;
+    // for (int i = 0 ; i < DISPLAY_HEIGHT ; i++)
+    //     for (int j = 0 ; j < DISPLAY_WIDTH ; j++)
+    //         theDisplayGrid[i][j] = false;
    
     // clear and rerender the window
     UpdateDisplay(true);

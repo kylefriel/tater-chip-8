@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-I. -I/usr/include/SDL2 -c -std=c++11
+CFLAGS=-I. -I/usr/include/SDL2 -c -std=c++11 -g
 LDFLAGS=-lSDL2main -lSDL2
 APP=tater-chip-8
 OBJDIR=obj
