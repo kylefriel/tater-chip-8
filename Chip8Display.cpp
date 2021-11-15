@@ -16,7 +16,7 @@ Chip8Display::~Chip8Display()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 bool Chip8Display::Initialize()
 {    
-    if (0 != SDL_Init(SDL_INIT_EVERYTHING))
+    if (0 != SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
     {        
         return false;
     }
@@ -27,7 +27,7 @@ bool Chip8Display::Initialize()
                                  DISPLAY_WIDTH * PIXEL_SCALE_FACTOR, 
                                  DISPLAY_HEIGHT * PIXEL_SCALE_FACTOR, 
                                  0);
-    theRenderer = SDL_CreateRenderer(theWindow, -1, SDL_RENDERER_ACCELERATED);
+    theRenderer = SDL_CreateRenderer(theWindow, -1, SDL_RENDERER_SOFTWARE);
     SDL_RenderSetScale(theRenderer, PIXEL_SCALE_FACTOR, PIXEL_SCALE_FACTOR);
     
     /*
@@ -48,18 +48,25 @@ bool Chip8Display::Initialize()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8Display::UpdateDisplay(bool clear)
 {
-    if (clear)
+
+    // clear the window
+    SDL_SetRenderDrawColor(theRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(theRenderer);    
+        
+    if (!clear)
     {
-        // clear and rerender the window
-        SDL_SetRenderDrawColor(theRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        SDL_RenderClear(theRenderer);
-    }
-    else
-    {
-        std::vector<SDL_Point> points = ConvertGridToPoints();
-        SDL_SetRenderDrawColor(theRenderer, 0, 255, 0, SDL_ALPHA_OPAQUE);  
-        SDL_RenderDrawPoints(theRenderer, points.data(), points.size());                 
-    }
+        std::vector<SDL_Point> points;
+        ConvertGridToPoints(points);        
+        if (0 != SDL_SetRenderDrawColor(theRenderer, 0, 255, 0, SDL_ALPHA_OPAQUE))
+        {
+            printf ("SDL_SetRenderDrawColor failed!\n");
+        }  
+        
+        if (0 != SDL_RenderDrawPoints(theRenderer, points.data(), points.size()))
+        {
+            printf ("SDL_RenderDrawPoints failed!\n");
+        }
+    }    
 
     SDL_RenderPresent(theRenderer);
 }
@@ -82,11 +89,8 @@ void Chip8Display::ClearScreen()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-std::vector<SDL_Point> Chip8Display::ConvertGridToPoints()
-{
-    std::vector<SDL_Point> points;
-
-    using namespace std;
+void Chip8Display::ConvertGridToPoints(std::vector<SDL_Point>& points)
+{        
     for (int w = 0 ; w < DISPLAY_WIDTH ; w++)
     {
         for (int h = 0 ; h < DISPLAY_HEIGHT ; h++)
@@ -97,7 +101,5 @@ std::vector<SDL_Point> Chip8Display::ConvertGridToPoints()
             }
         }
     }
-
-    return points;    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

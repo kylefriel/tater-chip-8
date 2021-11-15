@@ -29,28 +29,28 @@ void Display::Execute(Chip8* chip8)
     const uint16_t memEnd      = memIndex + thePixelHeight;
 
     chip8->SetFlagReg(0);
-    Chip8Display::Chip8DisplayGrid d = chip8->GetDisplay().GetDisplayGrid();
+    //Chip8Display::Chip8DisplayGrid& d = chip8->GetDisplay().GetDisplayGrid();
 
     for (uint8_t y = yStart ; memIndex < memEnd ; memIndex++, y++)  
     {
         uint8_t spriteData = chip8->GetMemory(memIndex);        
-        for (uint8_t bit = 0, x = xStart ; bit < sizeof(uint8_t) ; bit++, x++)   
+        for (uint8_t bit = 0, x = xStart ; bit < 8 ; bit++, x++)   
         {
             bool isPixelOn = GetPixelStateFromSprite(spriteData, bit);
             if (x < DISPLAY_WIDTH && y < DISPLAY_HEIGHT)
             {
                 if (isPixelOn)
                 {
-                    if (d[x][y])
+                    if (chip8->GetDisplay().GetDisplayGrid()[x][y])
                     {
                         // display pixel is already on and sprite data is on so flip it
-                        d[x][y] = false;
+                        chip8->GetDisplay().GetDisplayGrid()[x][y] = false;
                         chip8->SetFlagReg(1);
                     }
                     else
                     {
                         // turn on the pixel on
-                        d[x][y] = true;
+                        chip8->GetDisplay().GetDisplayGrid()[x][y] = true;
                     }
                 }
             }
@@ -65,6 +65,6 @@ void Display::Execute(Chip8* chip8)
 bool Display::GetPixelStateFromSprite(uint8_t sprite, uint8_t index)
 {
     // get the state of the bit as a boolean    
-    return (0 == sprite & (1 >> index)) ? false : true;
+    return (0 == sprite & (1 << index)) ? false : true;
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

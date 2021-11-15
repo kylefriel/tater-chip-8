@@ -27,14 +27,14 @@ class Chip8Display
     protected:        
 
         void UpdateDisplay(bool clear = false);
-        std::vector<SDL_Point> ConvertGridToPoints();
+        void ConvertGridToPoints(std::vector<SDL_Point>& points);
         
     // protected members here
     protected:          
 
-        Chip8DisplayGrid theDisplayGrid;
-
         SDL_Window* theWindow;
         SDL_Renderer* theRenderer;        
+
+        Chip8DisplayGrid theDisplayGrid;        
 };
 #endif
