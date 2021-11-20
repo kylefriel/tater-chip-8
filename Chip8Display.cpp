@@ -1,9 +1,11 @@
+#include <algorithm>
 #include "Chip8Display.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8Display::Chip8Display()
 {   
-    theDisplayGrid = {false}; 
+    //theDisplayGrid = {false}; 
+    memset(theDisplayGrid, 0, sizeof(theDisplayGrid));
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -29,18 +31,6 @@ bool Chip8Display::Initialize()
                                  0);
     theRenderer = SDL_CreateRenderer(theWindow, -1, SDL_RENDERER_SOFTWARE);
     SDL_RenderSetScale(theRenderer, PIXEL_SCALE_FACTOR, PIXEL_SCALE_FACTOR);
-    
-    /*
-    SDL_SetRenderDrawColor(theRenderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
-    for (int i = 0; i < 32 ; i++)
-    {
-        SDL_RenderDrawPoint(theRenderer, i, i);
-    }
-    SDL_RenderPresent(theRenderer);    
-    SDL_Delay(5000);            
-    ClearScreen();
-    SDL_Delay(5000);        
-    */
    
     return true;
 }
@@ -52,7 +42,7 @@ void Chip8Display::UpdateDisplay(bool clear)
     // clear the window
     SDL_SetRenderDrawColor(theRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(theRenderer);    
-        
+    
     if (!clear)
     {
         std::vector<SDL_Point> points;
@@ -61,11 +51,11 @@ void Chip8Display::UpdateDisplay(bool clear)
         {
             printf ("SDL_SetRenderDrawColor failed!\n");
         }  
-        
+                
         if (0 != SDL_RenderDrawPoints(theRenderer, points.data(), points.size()))
         {
             printf ("SDL_RenderDrawPoints failed!\n");
-        }
+        }        
     }    
 
     SDL_RenderPresent(theRenderer);
@@ -76,12 +66,7 @@ void Chip8Display::UpdateDisplay(bool clear)
 void Chip8Display::ClearScreen()
 {
     // clear all of the display points   
-    theDisplayGrid = {false}; 
-
-    // using namespace std;
-    // for (int i = 0 ; i < DISPLAY_HEIGHT ; i++)
-    //     for (int j = 0 ; j < DISPLAY_WIDTH ; j++)
-    //         theDisplayGrid[i][j] = false;
+    memset(theDisplayGrid, 0, sizeof(theDisplayGrid));    
    
     // clear and rerender the window
     UpdateDisplay(true);
@@ -91,13 +76,13 @@ void Chip8Display::ClearScreen()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8Display::ConvertGridToPoints(std::vector<SDL_Point>& points)
 {        
-    for (int w = 0 ; w < DISPLAY_WIDTH ; w++)
+    for (int x = 0 ; x < DISPLAY_WIDTH ; x++)
     {
-        for (int h = 0 ; h < DISPLAY_HEIGHT ; h++)
+        for (int y = 0 ; y < DISPLAY_HEIGHT ; y++)
         {
-            if (theDisplayGrid[w][h])
+            if (theDisplayGrid[x][y])
             {                
-                points.push_back({w, h});
+                points.push_back({x, y});
             }
         }
     }

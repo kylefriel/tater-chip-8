@@ -12,8 +12,7 @@ class Display: public InstructionBase
         virtual void Execute(Chip8* chip8);
         virtual std::string GetClassName() {return typeid(*this).name();};
 
-    protected:
-        bool GetPixelStateFromSprite(uint8_t sprite, uint8_t index);
+    protected:        
     
     protected:
         const uint16_t theXReg;

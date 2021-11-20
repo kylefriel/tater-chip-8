@@ -12,8 +12,8 @@
 class Chip8Display
 {    
     public:
-
-        typedef std::array< std::array<bool, DISPLAY_WIDTH>, DISPLAY_HEIGHT> Chip8DisplayGrid;
+        
+        typedef bool Chip8DisplayGrid[DISPLAY_WIDTH][DISPLAY_HEIGHT];
 
         Chip8Display();
         ~Chip8Display();

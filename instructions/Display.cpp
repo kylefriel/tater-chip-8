@@ -1,3 +1,4 @@
+#include <bitset>
 #include "../Chip8.h"
 #include "../Chip8Display.h"
 #include "Display.h"
@@ -28,15 +29,17 @@ void Display::Execute(Chip8* chip8)
     uint16_t memIndex          = chip8->GetIReg();
     const uint16_t memEnd      = memIndex + thePixelHeight;
 
-    chip8->SetFlagReg(0);
-    //Chip8Display::Chip8DisplayGrid& d = chip8->GetDisplay().GetDisplayGrid();
+    chip8->SetFlagReg(0);    
 
     for (uint8_t y = yStart ; memIndex < memEnd ; memIndex++, y++)  
     {
         uint8_t spriteData = chip8->GetMemory(memIndex);        
+
+        std::bitset<8> bits(spriteData);
+
         for (uint8_t bit = 0, x = xStart ; bit < 8 ; bit++, x++)   
-        {
-            bool isPixelOn = GetPixelStateFromSprite(spriteData, bit);
+        {                            
+            bool isPixelOn = bits.test(0x7 - bit);
             if (x < DISPLAY_WIDTH && y < DISPLAY_HEIGHT)
             {
                 if (isPixelOn)
@@ -58,13 +61,5 @@ void Display::Execute(Chip8* chip8)
     }    
 
     chip8->GetDisplay().Draw();
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-bool Display::GetPixelStateFromSprite(uint8_t sprite, uint8_t index)
-{
-    // get the state of the bit as a boolean    
-    return (0 == sprite & (1 << index)) ? false : true;
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
