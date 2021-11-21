@@ -20,10 +20,14 @@ class InstructionFactory
         std::map<uint16_t, InstructionCreateFunc> theFirstNibbleMap;
         static std::shared_ptr<InstructionBase> Process0(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process1(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process2(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process3(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process4(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process5(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process6(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process7(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process8(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process9(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> ProcessA(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> ProcessB(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> ProcessC(const uint16_t opcode);

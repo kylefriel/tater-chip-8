@@ -1,16 +1,18 @@
 #include "../Chip8.h"
-#include "Jump.h"
+#include "SetReg.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Jump::Jump(uint16_t opcode)
-    :theJumpPc(LS_THREE_NIBBLES(opcode))
+SetReg::SetReg(uint16_t opcode)
+    :theReg(SECOND_NIBBLE(opcode)),
+     theValue(LS_BYTE(opcode))
 {
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Jump::Execute(Chip8* chip8)
+void SetReg::Execute(Chip8* chip8)
 {
-    chip8->SetPc(theJumpPc);
+    chip8->SetVReg(theReg, theValue);
+    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,16 +1,16 @@
 #include "../Chip8.h"
-#include "Jump.h"
+#include "SubroutineReturn.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Jump::Jump(uint16_t opcode)
-    :theJumpPc(LS_THREE_NIBBLES(opcode))
+SubroutineReturn::SubroutineReturn()
 {
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Jump::Execute(Chip8* chip8)
+void SubroutineReturn::Execute(Chip8* chip8)
 {
-    chip8->SetPc(theJumpPc);
+    uint16_t storedPc = chip8->PopStack();
+    chip8->SetPc(storedPc);
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

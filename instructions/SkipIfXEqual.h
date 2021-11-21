@@ -1,22 +1,23 @@
 #include <cstdint>
 #include "InstructionBase.h"
 
-#ifndef _JUMP_
-#define _JUMP_
+#ifndef _SKIPIFXEQUAL_
+#define _SKIPIFXEQUAL_
 
-class Jump: public InstructionBase
+class SkipIfXEqual: public InstructionBase
 {
     public:
-        Jump(uint16_t opcode);
+        SkipIfXEqual(uint16_t opcode);
 
         virtual void Execute(Chip8* chip8);
         virtual std::string GetClassName() {return typeid(*this).name();};
 
     protected:
-        uint16_t theJumpPc;    
+        uint8_t theValue;
+        uint8_t theReg;
 
     private:
-        Jump() {};        
+        SkipIfXEqual() {};        
 };
 
 #endif

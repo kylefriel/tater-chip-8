@@ -48,11 +48,17 @@ class Chip8
         uint16_t GetFlagReg() {return theFlagRegister;}
         void SetFlagReg(uint16_t v) {theFlagRegister = v;}
 
-        // set the program counter
-        void SetProgramCounter(uint16_t pc) {theProgramCounter = pc;}
+        // program counter accessors
+        void SetPc(uint16_t pc) {theProgramCounter = pc;}
+        uint16_t GetPc() {return theProgramCounter;}
+        void MovePcToNextInstruction() {theProgramCounter += 2;}
 
         // get memory at an address
-        uint8_t GetMemory(uint16_t address);
+        uint8_t GetMemory(uint16_t address);                
+
+        // stack accessors
+        void PushStack(uint16_t d) {theStack.push(d);}
+        uint16_t PopStack();
 
     // protected methods here
     protected:

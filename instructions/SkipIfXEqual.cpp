@@ -1,8 +1,8 @@
 #include "../Chip8.h"
-#include "Set.h"
+#include "SkipIfXEqual.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Set::Set(uint16_t opcode)
+SkipIfXEqual::SkipIfXEqual(uint16_t opcode)
     :theReg(SECOND_NIBBLE(opcode)),
      theValue(LS_BYTE(opcode))
 {
@@ -10,8 +10,12 @@ Set::Set(uint16_t opcode)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Set::Execute(Chip8* chip8)
+void SkipIfXEqual::Execute(Chip8* chip8)
 {
-    chip8->SetVReg(theReg, theValue);
+    uint8_t regVal = chip8->GetVReg(theReg);
+    if (regVal == theValue)
+    {
+        chip8->MovePcToNextInstruction();            
+    }    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

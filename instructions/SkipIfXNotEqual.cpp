@@ -1,16 +1,21 @@
 #include "../Chip8.h"
-#include "Jump.h"
+#include "SkipIfXNotEqual.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Jump::Jump(uint16_t opcode)
-    :theJumpPc(LS_THREE_NIBBLES(opcode))
+SkipIfXNotEqual::SkipIfXNotEqual(uint16_t opcode)
+    :theReg(SECOND_NIBBLE(opcode)),
+     theValue(LS_BYTE(opcode))
 {
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Jump::Execute(Chip8* chip8)
+void SkipIfXNotEqual::Execute(Chip8* chip8)
 {
-    chip8->SetPc(theJumpPc);
+    uint8_t regVal = chip8->GetVReg(theReg);
+    if (regVal != theValue)
+    {
+        chip8->MovePcToNextInstruction();            
+    }    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

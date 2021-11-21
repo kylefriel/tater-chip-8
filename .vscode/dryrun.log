@@ -1,13 +1,5 @@
-make tater-chip-8 --dry-run --always-make --keep-going --print-directory
+make tater-chip-8 --dry-run --keep-going --print-directory
 make: Entering directory '/home/kyle/clones/tater-chip-8'
-mkdir -p obj	 
-g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/Chip8.o Chip8.cpp
-mkdir -p obj	 
-g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/Timer.o Timer.cpp
-mkdir -p obj	 
-g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/SoundTimer.o SoundTimer.cpp
-mkdir -p obj	 
-g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/Chip8Display.o Chip8Display.cpp
 mkdir -p obj	 
 g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/InstructionFactory.o InstructionFactory.cpp
 mkdir -p obj/instructions	 
@@ -19,13 +11,25 @@ g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/Display.o instr
 mkdir -p obj/instructions	 
 g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/Jump.o instructions/Jump.cpp
 mkdir -p obj/instructions	 
-g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/Set.o instructions/Set.cpp
+g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/SetReg.o instructions/SetReg.cpp
 mkdir -p obj/instructions	 
 g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/Add.o instructions/Add.cpp
 mkdir -p obj/instructions	 
 g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/SetIndex.o instructions/SetIndex.cpp
+mkdir -p obj/instructions	 
+g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/Subroutine.o instructions/Subroutine.cpp
+mkdir -p obj/instructions	 
+g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/SubroutineReturn.o instructions/SubroutineReturn.cpp
+mkdir -p obj/instructions	 
+g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/SkipIfXEqual.o instructions/SkipIfXEqual.cpp
+mkdir -p obj/instructions	 
+g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/SkipIfXNotEqual.o instructions/SkipIfXNotEqual.cpp
+mkdir -p obj/instructions	 
+g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/SkipIfXYEqual.o instructions/SkipIfXYEqual.cpp
+mkdir -p obj/instructions	 
+g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/instructions/SkipIfXYNotEqual.o instructions/SkipIfXYNotEqual.cpp
 mkdir -p obj	 
 g++ -I. -I/usr/include/SDL2 -c -std=c++11 -g -o obj/main.o main.cpp
-g++ -o tater-chip-8 obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8Display.o obj/InstructionFactory.o obj/instructions/InstructionBase.o obj/instructions/ClearScreen.o obj/instructions/Display.o obj/instructions/Jump.o obj/instructions/Set.o obj/instructions/Add.o obj/instructions/SetIndex.o obj/main.o -lSDL2main -lSDL2 
+g++ -o tater-chip-8 obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8Display.o obj/InstructionFactory.o obj/instructions/InstructionBase.o obj/instructions/ClearScreen.o obj/instructions/Display.o obj/instructions/Jump.o obj/instructions/SetReg.o obj/instructions/Add.o obj/instructions/SetIndex.o obj/instructions/Subroutine.o obj/instructions/SubroutineReturn.o obj/instructions/SkipIfXEqual.o obj/instructions/SkipIfXNotEqual.o obj/instructions/SkipIfXYEqual.o obj/instructions/SkipIfXYNotEqual.o obj/main.o -lSDL2main -lSDL2 
 make: Leaving directory '/home/kyle/clones/tater-chip-8'
  

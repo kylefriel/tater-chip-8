@@ -1,13 +1,13 @@
 #include <cstdint>
 #include "InstructionBase.h"
 
-#ifndef _SET_
-#define _SET_
+#ifndef _SETREG_
+#define _SETREG_
 
-class Set: public InstructionBase
+class SetReg: public InstructionBase
 {
     public:
-        Set(uint16_t opcode);
+        SetReg(uint16_t opcode);
 
         virtual void Execute(Chip8* chip8);  
         virtual std::string GetClassName() {return typeid(*this).name();};      
@@ -17,7 +17,7 @@ class Set: public InstructionBase
         uint8_t theValue;
 
     private:
-        Set() {};        
+        SetReg() {};        
 };
 
 #endif

@@ -67,9 +67,9 @@ void Chip8::Execute()
     while (true && theProgramCounter < theMemory.size())
     {            
         // get the next instruction and increment the program counter
-        //uint16_t opcode = theMemory[theProgramCounter++];
-        uint16_t opcode = (theMemory[theProgramCounter] << 8) | theMemory[theProgramCounter+1];
-        theProgramCounter += 2;        
+        uint16_t opcode = (theMemory[theProgramCounter] << 8) | theMemory[theProgramCounter+1];        
+        // increment to the next instruction for he next loop
+        MovePcToNextInstruction();    
 
         // get the correct instruction object to perform the execution
         std::shared_ptr<InstructionBase> instruction = theInstructionFactory.GetInstruction(opcode);
@@ -161,5 +161,22 @@ uint8_t Chip8::GetMemory(uint16_t address)
         std::cerr << e.what() << '\n'; 
         return 0;       
     }    
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+uint16_t Chip8::PopStack()
+{
+    try
+    {
+        uint16_t d = theStack.top();
+        theStack.pop();
+        return d;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n'; 
+        return 0;       
+    }  
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
