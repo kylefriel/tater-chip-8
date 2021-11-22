@@ -17,7 +17,7 @@ class InstructionFactory
 
     protected:
     
-        std::map<uint16_t, InstructionCreateFunc> theFirstNibbleMap;
+        static std::map<uint16_t, InstructionCreateFunc> theFirstNibbleMap;
         static std::shared_ptr<InstructionBase> Process0(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process1(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process2(const uint16_t opcode);
@@ -34,6 +34,17 @@ class InstructionFactory
         static std::shared_ptr<InstructionBase> ProcessD(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> ProcessE(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> ProcessF(const uint16_t opcode);
+
+        static std::map<uint16_t, InstructionCreateFunc> theLogicalOperationsMap;
+        static std::shared_ptr<InstructionBase> Process8XY0(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process8XY1(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process8XY2(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process8XY3(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process8XY4(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process8XY5(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process8XY7(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process8XY6(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> Process8XYE(const uint16_t opcode);
 };
 
 #endif
