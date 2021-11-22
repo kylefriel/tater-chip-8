@@ -21,6 +21,7 @@
 #include "instructions/SubtractXfromY.h"
 #include "instructions/ShiftLeft.h"
 #include "instructions/ShiftRight.h"
+#include "instructions/Random.h"
 #include "InstructionFactory.h"
 
 std::map<uint16_t, InstructionFactory::InstructionCreateFunc> InstructionFactory::theFirstNibbleMap;
@@ -180,7 +181,7 @@ std::shared_ptr<InstructionBase> InstructionFactory::ProcessB(const uint16_t opc
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::ProcessC(const uint16_t opcode)
 {
-    return 0;
+    return std::shared_ptr<InstructionBase>(new Random(opcode));
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

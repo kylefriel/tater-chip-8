@@ -1,11 +1,7 @@
 make tater-chip-8 --dry-run --keep-going --print-directory
 make: Entering directory '/home/kyle/clones/tater-chip-8'
-mkdir -p obj	 
-g++ -I. -I/usr/include/SDL2 -c -std=c++17 -g -o obj/InstructionFactory.o InstructionFactory.cpp
-mkdir -p obj/instructions	 
-g++ -I. -I/usr/include/SDL2 -c -std=c++17 -g -o obj/instructions/ShiftLeft.o instructions/ShiftLeft.cpp
-mkdir -p obj/instructions	 
-g++ -I. -I/usr/include/SDL2 -c -std=c++17 -g -o obj/instructions/ShiftRight.o instructions/ShiftRight.cpp
-g++ -o tater-chip-8 obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8Display.o obj/InstructionFactory.o obj/instructions/InstructionBase.o obj/instructions/ClearScreen.o obj/instructions/Display.o obj/instructions/Jump.o obj/instructions/SetReg.o obj/instructions/Add.o obj/instructions/SetIndex.o obj/instructions/Subroutine.o obj/instructions/SubroutineReturn.o obj/instructions/SkipIfXEqual.o obj/instructions/SkipIfXNotEqual.o obj/instructions/SkipIfXYEqual.o obj/instructions/SkipIfXYNotEqual.o obj/instructions/Set.o obj/instructions/BinaryOr.o obj/instructions/BinaryAnd.o obj/instructions/LogicalXor.o obj/instructions/AddWithCarry.o obj/instructions/Subtract.o obj/instructions/SubtractYfromX.o obj/instructions/SubtractXfromY.o obj/instructions/ShiftLeft.o obj/instructions/ShiftRight.o obj/main.o -lSDL2main -lSDL2 
+ 
+make: 'tater-chip-8' is up to date.
+ 
 make: Leaving directory '/home/kyle/clones/tater-chip-8'
  

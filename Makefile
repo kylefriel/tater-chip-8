@@ -32,6 +32,7 @@ SRC = Chip8.cpp \
       instructions/SubtractXfromY.cpp \
       instructions/ShiftLeft.cpp \
       instructions/ShiftRight.cpp \
+      instructions/Random.cpp \
       main.cpp		
 
 OBJS = $(SRC:%.cpp=$(OBJDIR)/%.o)		
