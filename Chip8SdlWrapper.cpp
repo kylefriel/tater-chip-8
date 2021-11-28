@@ -1,8 +1,8 @@
 #include <algorithm>
-#include "Chip8Display.h"
+#include "Chip8SdlWrapper.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Chip8Display::Chip8Display()
+Chip8SdlWrapper::Chip8SdlWrapper()
 {   
     //theDisplayGrid = {false}; 
     memset(theDisplayGrid, 0, sizeof(theDisplayGrid));
@@ -10,15 +10,15 @@ Chip8Display::Chip8Display()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Chip8Display::~Chip8Display()
+Chip8SdlWrapper::~Chip8SdlWrapper()
 {    
     SDL_DestroyWindow(theWindow);
     SDL_Quit();
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-bool Chip8Display::Initialize()
+bool Chip8SdlWrapper::Initialize()
 {    
-    if (0 != SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
+    if (0 != SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS))
     {        
         return false;
     }
@@ -36,7 +36,7 @@ bool Chip8Display::Initialize()
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Chip8Display::UpdateDisplay(bool clear)
+void Chip8SdlWrapper::UpdateDisplay(bool clear)
 {
 
     // clear the window
@@ -63,7 +63,7 @@ void Chip8Display::UpdateDisplay(bool clear)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Chip8Display::ClearScreen()
+void Chip8SdlWrapper::ClearScreen()
 {
     // clear all of the display points   
     memset(theDisplayGrid, 0, sizeof(theDisplayGrid));    
@@ -74,7 +74,7 @@ void Chip8Display::ClearScreen()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-void Chip8Display::ConvertGridToPoints(std::vector<SDL_Point>& points)
+void Chip8SdlWrapper::ConvertGridToPoints(std::vector<SDL_Point>& points)
 {        
     for (int x = 0 ; x < DISPLAY_WIDTH ; x++)
     {

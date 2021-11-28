@@ -7,7 +7,7 @@ OBJDIR=obj
 SRC = Chip8.cpp \
       Timer.cpp \
       SoundTimer.cpp \
-      Chip8Display.cpp \
+      Chip8SdlWrapper.cpp \
       InstructionFactory.cpp \
       instructions/InstructionBase.cpp \
       instructions/ClearScreen.cpp \

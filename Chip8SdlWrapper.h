@@ -9,14 +9,14 @@
 #define DISPLAY_HEIGHT      32
 #define PIXEL_SCALE_FACTOR  10
 
-class Chip8Display
+class Chip8SdlWrapper
 {    
     public:
         
         typedef bool Chip8DisplayGrid[DISPLAY_WIDTH][DISPLAY_HEIGHT];
 
-        Chip8Display();
-        ~Chip8Display();
+        Chip8SdlWrapper();
+        ~Chip8SdlWrapper();
         bool Initialize();
         void Draw() {UpdateDisplay();}
         void ClearScreen();

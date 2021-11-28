@@ -5,7 +5,7 @@
 #include <vector>
 #include "Timer.h"
 #include "SoundTimer.h"
-#include "Chip8Display.h"
+#include "Chip8SdlWrapper.h"
 #include "InstructionFactory.h"
 
 #ifndef _CHIP8_
@@ -34,7 +34,7 @@ class Chip8
     public:
 
         // accessor methods
-        Chip8Display& GetDisplay() {return theDisplay;}
+        Chip8SdlWrapper& GetSdl() {return theSdlWrapper;}
 
         // get and set variable registers
         uint8_t GetVReg(uint16_t r);
@@ -70,7 +70,7 @@ class Chip8
         
         Timer theDelayTimer;
         SoundTimer theSoundTimer;        
-        Chip8Display theDisplay;            
+        Chip8SdlWrapper theSdlWrapper;            
         
         std::stack<uint16_t> theStack;
         uint16_t theProgramCounter;

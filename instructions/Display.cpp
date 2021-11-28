@@ -1,6 +1,6 @@
 #include <bitset>
 #include "../Chip8.h"
-#include "../Chip8Display.h"
+#include "../Chip8SdlWrapper.h"
 #include "Display.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -44,22 +44,22 @@ void Display::Execute(Chip8* chip8)
             {
                 if (isPixelOn)
                 {
-                    if (chip8->GetDisplay().GetDisplayGrid()[x][y])
+                    if (chip8->GetSdl().GetDisplayGrid()[x][y])
                     {
                         // display pixel is already on and sprite data is on so flip it
-                        chip8->GetDisplay().GetDisplayGrid()[x][y] = false;
+                        chip8->GetSdl().GetDisplayGrid()[x][y] = false;
                         chip8->SetFlagReg(1);
                     }
                     else
                     {
                         // turn on the pixel on
-                        chip8->GetDisplay().GetDisplayGrid()[x][y] = true;
+                        chip8->GetSdl().GetDisplayGrid()[x][y] = true;
                     }
                 }
             }
         } 
     }    
 
-    chip8->GetDisplay().Draw();
+    chip8->GetSdl().Draw();
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

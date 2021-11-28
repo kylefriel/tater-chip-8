@@ -2,348 +2,180 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target 'all'.  Stop.
  
 # GNU Make 4.2.1
- 
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
- 
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Mon Nov 22 12:11:31 2021
- 
+# Make data base, printed on Sun Nov 28 09:18:56 2021
 
 # Variables
- 
 
- 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
- 
 ?F = $(notdir $?)
- 
 # environment
- 
 DESKTOP_SESSION = xubuntu
- 
 # default
- 
 .SHELLFLAGS := -c
- 
 # environment
- 
 XDG_SESSION_CLASS = user
- 
 # makefile (from 'Makefile', line 7)
- 
-SRC = Chip8.cpp Timer.cpp SoundTimer.cpp Chip8Display.cpp InstructionFactory.cpp instructions/InstructionBase.cpp instructions/ClearScreen.cpp instructions/Display.cpp instructions/Jump.cpp instructions/SetReg.cpp instructions/Add.cpp instructions/SetIndex.cpp instructions/Subroutine.cpp instructions/SubroutineReturn.cpp instructions/SkipIfXEqual.cpp instructions/SkipIfXNotEqual.cpp instructions/SkipIfXYEqual.cpp instructions/SkipIfXYNotEqual.cpp instructions/Set.cpp instructions/BinaryOr.cpp instructions/BinaryAnd.cpp instructions/LogicalXor.cpp instructions/AddWithCarry.cpp instructions/Subtract.cpp instructions/SubtractYfromX.cpp instructions/SubtractXfromY.cpp instructions/ShiftLeft.cpp instructions/ShiftRight.cpp instructions/Random.cpp main.cpp		
- 
+SRC = Chip8.cpp Timer.cpp SoundTimer.cpp Chip8SdlWrapper.cpp InstructionFactory.cpp instructions/InstructionBase.cpp instructions/ClearScreen.cpp instructions/Display.cpp instructions/Jump.cpp instructions/SetReg.cpp instructions/Add.cpp instructions/SetIndex.cpp instructions/Subroutine.cpp instructions/SubroutineReturn.cpp instructions/SkipIfXEqual.cpp instructions/SkipIfXNotEqual.cpp instructions/SkipIfXYEqual.cpp instructions/SkipIfXYNotEqual.cpp instructions/Set.cpp instructions/BinaryOr.cpp instructions/BinaryAnd.cpp instructions/LogicalXor.cpp instructions/AddWithCarry.cpp instructions/Subtract.cpp instructions/SubtractYfromX.cpp instructions/SubtractXfromY.cpp instructions/ShiftLeft.cpp instructions/ShiftRight.cpp instructions/Random.cpp main.cpp		
 # environment
- 
 XDG_SESSION_TYPE = x11
- 
 # environment
- 
 VSCODE_LOG_NATIVE = false
- 
 # automatic
- 
 ?D = $(patsubst %/,%,$(dir $?))
- 
 # automatic
- 
 @D = $(patsubst %/,%,$(dir $@))
- 
 # environment
- 
 XAUTHORITY = /home/kyle/.Xauthority
- 
 # environment
- 
 GDMSESSION = xubuntu
- 
 # default
- 
 MAKE_VERSION := 4.2.1
- 
 # makefile
- 
 CURDIR := /home/kyle/clones/tater-chip-8
- 
 # makefile
- 
 SHELL = /bin/sh
- 
 # environment
- 
 GDM_LANG = en_US
- 
 # environment
- 
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
- 
 # environment
- 
 _ = /usr/share/code/code
- 
 # makefile (from 'Makefile', line 2)
- 
 CFLAGS = -I. -I/usr/include/SDL2 -c -std=c++17 -g
- 
 # environment
- 
 XDG_CONFIG_DIRS = /etc/xdg/xdg-xubuntu:/etc/xdg:/etc/xdg
- 
 # environment
- 
 GTK_OVERLAY_SCROLLING = 0
- 
 # makefile (from 'Makefile', line 1)
- 
 MAKEFILE_LIST :=  Makefile
- 
 # automatic
- 
 @F = $(notdir $@)
- 
 # 'override' directive
- 
 GNUMAKEFLAGS := 
- 
 # environment
- 
 XDG_DATA_DIRS = /usr/share/xubuntu:/usr/share/xfce4:/usr/local/share:/usr/share:/var/lib/snapd/desktop:/usr/share
- 
 # environment
- 
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
- 
 # environment
- 
 VSCODE_VERBOSE_LOGGING = true
- 
 # makefile (from 'Makefile', line 38)
- 
 OBJS = $(SRC:%.cpp=$(OBJDIR)/%.o)		
- 
 # environment
- 
 LESSOPEN = | /usr/bin/lesspipe %s
- 
 # makefile (from 'Makefile', line 4)
- 
 APP = tater-chip-8
- 
 # environment
- 
 VSCODE_CWD = /home/kyle
- 
 # environment
- 
 XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
- 
 # default
- 
 MAKE_HOST := x86_64-pc-linux-gnu
- 
 # environment
- 
 PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
- 
 # environment
- 
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
- 
 # environment
- 
-SESSION_MANAGER = local/Xubuntu-VirtualBox:@/tmp/.ICE-unix/718,unix/Xubuntu-VirtualBox:/tmp/.ICE-unix/718
- 
+SESSION_MANAGER = local/Xubuntu-VirtualBox:@/tmp/.ICE-unix/720,unix/Xubuntu-VirtualBox:/tmp/.ICE-unix/720
 # environment
- 
 XDG_RUNTIME_DIR = /run/user/1000
- 
 # environment
- 
 XDG_MENU_PREFIX = xfce-
- 
 # environment
- 
 VSCODE_LOG_STACK = false
- 
 # environment
- 
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a761662b-61e1-4600-ab1c-d939876e421c&iid=a761662b-61e1-4600-ab1c-d939876e421c&sid=a761662b-61e1-4600-ab1c-d939876e421c","uploadToServer":true}
- 
 # makefile (from 'Makefile', line 3)
- 
 LDFLAGS = -lSDL2main -lSDL2
- 
 # default
- 
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
- 
 # environment
- 
 XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/kyle
- 
 # environment
- 
 LS_COLORS = 
- 
 # environment
- 
 XDG_SESSION_DESKTOP = xubuntu
- 
 # environment
- 
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
- 
 # automatic
- 
 %F = $(notdir $%)
- 
 # environment
- 
 DISPLAY = :0.0
- 
 # environment
- 
 VSCODE_PIPE_LOGGING = true
- 
 # environment
- 
 PWD = /home/kyle/clones/tater-chip-8
- 
 # environment
- 
 QT_QPA_PLATFORMTHEME = gtk2
- 
 # default
- 
 .LOADED := 
- 
 # environment
- 
 XDG_SEAT = seat0
- 
 # environment
- 
-SSH_AGENT_PID = 801
- 
+SSH_AGENT_PID = 803
 # environment
- 
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
- 
 # environment
- 
 VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
- 
 # environment
- 
 HOME = /home/kyle
- 
 # environment
- 
 LESSCLOSE = /usr/bin/lesspipe %s %s
- 
 # environment
- 
-VSCODE_CODE_CACHE_PATH = /home/kyle/.config/Code/CachedData/6cba118ac49a1b88332f312a8f67186f7f3c1643
- 
+VSCODE_CODE_CACHE_PATH = /home/kyle/.config/Code/CachedData/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247
 # environment
- 
 LOGNAME = kyle
- 
 # environment
- 
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
- 
 # environment
- 
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
- 
 # automatic
- 
 ^D = $(patsubst %/,%,$(dir $^))
- 
 # environment
- 
 XDG_VTNR = 7
- 
 # environment
- 
 CLUTTER_BACKEND = x11
- 
 # environment
- 
 MAKELEVEL := 0
- 
 # default
- 
 MAKE = $(MAKE_COMMAND)
- 
 # default
- 
 MAKECMDGOALS := all
- 
 # environment
- 
 SHLVL = 0
- 
 # makefile (from 'Makefile', line 1)
- 
 CC = g++
- 
 # environment
- 
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-83ad78db-741e-4941-aedd-743566160fb4.sock
- 
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-989a4334-484a-4baf-9908-8ad4673eb265.sock
 # environment
- 
 XDG_SESSION_ID = c1
- 
 # environment
- 
 USER = kyle
- 
 # makefile
- 
 .DEFAULT_GOAL := build
- 
 # environment
- 
 XDG_CURRENT_DESKTOP = XFCE
- 
 # automatic
- 
 %D = $(patsubst %/,%,$(dir $%))
- 
 # default
- 
 MAKE_COMMAND := make
- 
 # default
- 
 .VARIABLES := 
- 
 # automatic
- 
 *F = $(notdir $*)
- 
 # environment
 LANGUAGE = en_US
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-aef48fbd-1.61.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-aef48fbd-1.62.3-main.sock
 # makefile
 MAKEFLAGS = pqrR
 # environment
@@ -383,7 +215,7 @@ CHROME_DESKTOP = code-url-handler.desktop
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1222
+VSCODE_PID = 1155
 # variable set hash-table stats:
 # Load=102/1024=10%, Rehash=0, Collisions=11/136=8%
 
@@ -393,9 +225,11 @@ VSCODE_PID = 1222
 
 # Directories
 
-# . (device 2053, inode 393872): 22 files, no impossibilities.
+# . (device 2053, inode 393872): 21 files, no impossibilities.
+ 
 
-# 22 files, no impossibilities in 1 directories.
+ 
+# 21 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -408,18 +242,13 @@ obj/instructions/ShiftRight.o: instructions/ShiftRight.cpp
 #  Implicit/static pattern stem: 'instructions/ShiftRight'
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'Makefile', line 49):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
 # Not a target:
 instructions/Display.cpp:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-Chip8Display.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -462,6 +291,7 @@ all:
 #  File has not been updated.
 
 obj/instructions/AddWithCarry.o: instructions/AddWithCarry.cpp
+ 
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/AddWithCarry'
 #  Modification time never checked.
@@ -545,7 +375,7 @@ obj/main.o: main.cpp
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
-tater-chip-8: obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8Display.o obj/InstructionFactory.o obj/instructions/InstructionBase.o obj/instructions/ClearScreen.o obj/instructions/Display.o obj/instructions/Jump.o obj/instructions/SetReg.o obj/instructions/Add.o obj/instructions/SetIndex.o obj/instructions/Subroutine.o obj/instructions/SubroutineReturn.o obj/instructions/SkipIfXEqual.o obj/instructions/SkipIfXNotEqual.o obj/instructions/SkipIfXYEqual.o obj/instructions/SkipIfXYNotEqual.o obj/instructions/Set.o obj/instructions/BinaryOr.o obj/instructions/BinaryAnd.o obj/instructions/LogicalXor.o obj/instructions/AddWithCarry.o obj/instructions/Subtract.o obj/instructions/SubtractYfromX.o obj/instructions/SubtractXfromY.o obj/instructions/ShiftLeft.o obj/instructions/ShiftRight.o obj/instructions/Random.o obj/main.o
+tater-chip-8: obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8SdlWrapper.o obj/InstructionFactory.o obj/instructions/InstructionBase.o obj/instructions/ClearScreen.o obj/instructions/Display.o obj/instructions/Jump.o obj/instructions/SetReg.o obj/instructions/Add.o obj/instructions/SetIndex.o obj/instructions/Subroutine.o obj/instructions/SubroutineReturn.o obj/instructions/SkipIfXEqual.o obj/instructions/SkipIfXNotEqual.o obj/instructions/SkipIfXYEqual.o obj/instructions/SkipIfXYNotEqual.o obj/instructions/Set.o obj/instructions/BinaryOr.o obj/instructions/BinaryAnd.o obj/instructions/LogicalXor.o obj/instructions/AddWithCarry.o obj/instructions/Subtract.o obj/instructions/SubtractYfromX.o obj/instructions/SubtractXfromY.o obj/instructions/ShiftLeft.o obj/instructions/ShiftRight.o obj/instructions/Random.o obj/main.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -555,7 +385,7 @@ tater-chip-8: obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8Display.o obj/In
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-22 12:11:22.242312678
+#  Last modified 2021-11-28 09:18:31.782140739
 #  File has been updated.
 #  Successfully updated.
 
@@ -615,13 +445,9 @@ main.cpp:
 # Not a target:
 instructions/BinaryAnd.cpp:
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
- 
 #  File has not been updated.
- 
 
- 
 obj/instructions/Display.o: instructions/Display.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/Display'
@@ -630,6 +456,12 @@ obj/instructions/Display.o: instructions/Display.cpp
 #  recipe to execute (from 'Makefile', line 49):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
+
+# Not a target:
+Chip8SdlWrapper.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 obj/instructions/Jump.o: instructions/Jump.cpp
 #  Implicit rule search has not been done.
@@ -705,6 +537,7 @@ obj/instructions/ShiftLeft.o: instructions/ShiftLeft.cpp
 #  Implicit/static pattern stem: 'instructions/ShiftLeft'
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'Makefile', line 49):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
@@ -727,6 +560,15 @@ instructions/ClearScreen.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+obj/Chip8SdlWrapper.o: Chip8SdlWrapper.cpp
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'Chip8SdlWrapper'
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 49):
+	@mkdir -p $(@D)	 
+	$(CC) $(CFLAGS) -o $@ $<
+
 obj/instructions/SetIndex.o: instructions/SetIndex.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/SetIndex'
@@ -746,15 +588,6 @@ clean:
 obj/instructions/Add.o: instructions/Add.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/Add'
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
-	@mkdir -p $(@D)	 
-	$(CC) $(CFLAGS) -o $@ $<
-
-obj/Chip8Display.o: Chip8Display.cpp
-#  Implicit rule search has not been done.
-#  Implicit/static pattern stem: 'Chip8Display'
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 49):
@@ -897,22 +730,20 @@ obj/instructions/ClearScreen.o: instructions/ClearScreen.cpp
 	$(CC) $(CFLAGS) -o $@ $<
 
 # files hash-table stats:
-# Load=67/1024=7%, Rehash=0, Collisions=12/169=7%
+ 
+# Load=67/1024=7%, Rehash=0, Collisions=9/169=5%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
- 
 # No general ('VPATH' variable) search path.
- 
 
- 
-# strcache buffers: 1 (0) / strings = 115 / storage = 2437 B / avg = 21 B
-# current buf: size = 8162 B / used = 2437 B / count = 115 / avg = 21 B
+# strcache buffers: 1 (0) / strings = 115 / storage = 2449 B / avg = 21 B
+# current buf: size = 8162 B / used = 2449 B / count = 115 / avg = 21 B
 
-# strcache performance: lookups = 190 / hit rate = 39%
+# strcache performance: lookups = 189 / hit rate = 39%
 # hash-table stats:
-# Load=115/8192=1%, Rehash=0, Collisions=1/190=1%
-# Finished Make data base on Mon Nov 22 12:11:31 2021
+# Load=115/8192=1%, Rehash=0, Collisions=1/189=1%
+# Finished Make data base on Sun Nov 28 09:18:56 2021
 
  

@@ -58,7 +58,7 @@ bool Chip8::LoadFromFile(std::string file)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8::Execute()
 {            
-    if (!theDisplay.Initialize())
+    if (!theSdlWrapper.Initialize())
     {
         printf ("failed to initialize graphics\n");
         return;
