@@ -9,7 +9,7 @@ class Subroutine: public InstructionBase
     public:
         Subroutine(uint16_t opcode);
 
-        virtual void Execute(Chip8* chip8);        \
+        virtual void Execute(Chip8* chip8);
         virtual std::string GetClassName() {return typeid(*this).name();};
 
     protected:

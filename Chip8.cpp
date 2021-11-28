@@ -84,6 +84,14 @@ void Chip8::Execute()
         // the next instruction
         std::this_thread::sleep_for(theBetweenInstructionWaitTimeMs);
 
+        theSdlWrapper.CheckForKeyboardEvents();
+
+        // see if the user wants to exit
+        if (theSdlWrapper.EscKeyPressed())
+        {            
+            break;
+        }
+
         theDelayTimer.Run();
         theSoundTimer.Run();        
     }

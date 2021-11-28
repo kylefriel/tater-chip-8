@@ -22,6 +22,11 @@
 #include "instructions/ShiftLeft.h"
 #include "instructions/ShiftRight.h"
 #include "instructions/Random.h"
+#include "instructions/SkipIfKeyPressed.h"
+#include "instructions/SkipIfKeyNotPressed.h"
+#include "instructions/SetSoundTimer.h"
+#include "instructions/SetXToDelayTimer.h"
+#include "instructions/SetDelayTimerToX.h"
 #include "InstructionFactory.h"
 
 std::map<uint16_t, InstructionFactory::InstructionCreateFunc> InstructionFactory::theFirstNibbleMap;
@@ -196,6 +201,15 @@ std::shared_ptr<InstructionBase> InstructionFactory::ProcessD(const uint16_t opc
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::ProcessE(const uint16_t opcode)
 {
+    if (0x9e == LS_BYTE(opcode))
+    {        
+        return (std::shared_ptr<InstructionBase>(new SkipIfKeyPressed(opcode)));
+    }
+    else if (0xa1 == LS_BYTE(opcode))
+    {        
+        return (std::shared_ptr<InstructionBase>(new SkipIfKeyNotPressed(opcode)));
+    }
+    
     return 0;
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -203,6 +217,19 @@ std::shared_ptr<InstructionBase> InstructionFactory::ProcessE(const uint16_t opc
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::ProcessF(const uint16_t opcode)
 {
+    if (0x07 == LS_BYTE(opcode))
+    {        
+        return (std::shared_ptr<InstructionBase>(new SetXToDelayTimer(opcode)));
+    }
+    else if (0x15 == LS_BYTE(opcode))
+    {        
+        return (std::shared_ptr<InstructionBase>(new SetDelayTimerToX(opcode)));
+    }
+    else if (0x18 == LS_BYTE(opcode))
+    {        
+        return (std::shared_ptr<InstructionBase>(new SetSoundTimer(opcode)));
+    }
+    
     return 0;
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

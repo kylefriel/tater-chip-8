@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
- 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Nov 28 09:18:56 2021
+# Make data base, printed on Sun Nov 28 13:07:09 2021
 
 # Variables
 
@@ -23,7 +21,7 @@ DESKTOP_SESSION = xubuntu
 # environment
 XDG_SESSION_CLASS = user
 # makefile (from 'Makefile', line 7)
-SRC = Chip8.cpp Timer.cpp SoundTimer.cpp Chip8SdlWrapper.cpp InstructionFactory.cpp instructions/InstructionBase.cpp instructions/ClearScreen.cpp instructions/Display.cpp instructions/Jump.cpp instructions/SetReg.cpp instructions/Add.cpp instructions/SetIndex.cpp instructions/Subroutine.cpp instructions/SubroutineReturn.cpp instructions/SkipIfXEqual.cpp instructions/SkipIfXNotEqual.cpp instructions/SkipIfXYEqual.cpp instructions/SkipIfXYNotEqual.cpp instructions/Set.cpp instructions/BinaryOr.cpp instructions/BinaryAnd.cpp instructions/LogicalXor.cpp instructions/AddWithCarry.cpp instructions/Subtract.cpp instructions/SubtractYfromX.cpp instructions/SubtractXfromY.cpp instructions/ShiftLeft.cpp instructions/ShiftRight.cpp instructions/Random.cpp main.cpp		
+SRC = Chip8.cpp Timer.cpp SoundTimer.cpp Chip8SdlWrapper.cpp InstructionFactory.cpp instructions/InstructionBase.cpp instructions/ClearScreen.cpp instructions/Display.cpp instructions/Jump.cpp instructions/SetReg.cpp instructions/Add.cpp instructions/SetIndex.cpp instructions/Subroutine.cpp instructions/SubroutineReturn.cpp instructions/SkipIfXEqual.cpp instructions/SkipIfXNotEqual.cpp instructions/SkipIfXYEqual.cpp instructions/SkipIfXYNotEqual.cpp instructions/Set.cpp instructions/BinaryOr.cpp instructions/BinaryAnd.cpp instructions/LogicalXor.cpp instructions/AddWithCarry.cpp instructions/Subtract.cpp instructions/SubtractYfromX.cpp instructions/SubtractXfromY.cpp instructions/ShiftLeft.cpp instructions/ShiftRight.cpp instructions/Random.cpp instructions/SkipIfKeyPressed.cpp instructions/SkipIfKeyNotPressed.cpp instructions/SetSoundTimer.cpp instructions/SetXToDelayTimer.cpp instructions/SetDelayTimerToX.cpp main.cpp		
 # environment
 XDG_SESSION_TYPE = x11
 # environment
@@ -66,7 +64,7 @@ XDG_DATA_DIRS = /usr/share/xubuntu:/usr/share/xfce4:/usr/local/share:/usr/share:
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from 'Makefile', line 38)
+# makefile (from 'Makefile', line 43)
 OBJS = $(SRC:%.cpp=$(OBJDIR)/%.o)		
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
@@ -225,11 +223,9 @@ VSCODE_PID = 1155
 
 # Directories
 
-# . (device 2053, inode 393872): 21 files, no impossibilities.
- 
+# . (device 2053, inode 393872): 22 files, no impossibilities.
 
- 
-# 21 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -242,8 +238,16 @@ obj/instructions/ShiftRight.o: instructions/ShiftRight.cpp
 #  Implicit/static pattern stem: 'instructions/ShiftRight'
 #  Modification time never checked.
 #  File has not been updated.
- 
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
+	@mkdir -p $(@D)	 
+	$(CC) $(CFLAGS) -o $@ $<
+
+obj/instructions/SetSoundTimer.o: instructions/SetSoundTimer.cpp
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'instructions/SetSoundTimer'
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -264,7 +268,7 @@ obj/Timer.o: Timer.cpp
 #  Implicit/static pattern stem: 'Timer'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -272,6 +276,9 @@ obj/Timer.o: Timer.cpp
 instructions/Jump.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
+make: *** No rule to make target 'all'.  Stop.
+ 
 #  File has not been updated.
 
 obj/instructions/Random.o: instructions/Random.cpp
@@ -279,7 +286,7 @@ obj/instructions/Random.o: instructions/Random.cpp
 #  Implicit/static pattern stem: 'instructions/Random'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -291,12 +298,11 @@ all:
 #  File has not been updated.
 
 obj/instructions/AddWithCarry.o: instructions/AddWithCarry.cpp
- 
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/AddWithCarry'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -305,7 +311,7 @@ obj/instructions/BinaryOr.o: instructions/BinaryOr.cpp
 #  Implicit/static pattern stem: 'instructions/BinaryOr'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -314,7 +320,7 @@ obj/instructions/SubtractYfromX.o: instructions/SubtractYfromX.cpp
 #  Implicit/static pattern stem: 'instructions/SubtractYfromX'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -323,7 +329,7 @@ obj/instructions/SubroutineReturn.o: instructions/SubroutineReturn.cpp
 #  Implicit/static pattern stem: 'instructions/SubroutineReturn'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -339,18 +345,21 @@ instructions/Set.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-instructions/InstructionBase.cpp:
+obj/instructions/SetXToDelayTimer.o: instructions/SetXToDelayTimer.cpp
 #  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'instructions/SetXToDelayTimer'
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (from 'Makefile', line 54):
+	@mkdir -p $(@D)	 
+	$(CC) $(CFLAGS) -o $@ $<
 
 obj/instructions/SetReg.o: instructions/SetReg.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/SetReg'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -371,21 +380,30 @@ obj/main.o: main.cpp
 #  Implicit/static pattern stem: 'main'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
-tater-chip-8: obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8SdlWrapper.o obj/InstructionFactory.o obj/instructions/InstructionBase.o obj/instructions/ClearScreen.o obj/instructions/Display.o obj/instructions/Jump.o obj/instructions/SetReg.o obj/instructions/Add.o obj/instructions/SetIndex.o obj/instructions/Subroutine.o obj/instructions/SubroutineReturn.o obj/instructions/SkipIfXEqual.o obj/instructions/SkipIfXNotEqual.o obj/instructions/SkipIfXYEqual.o obj/instructions/SkipIfXYNotEqual.o obj/instructions/Set.o obj/instructions/BinaryOr.o obj/instructions/BinaryAnd.o obj/instructions/LogicalXor.o obj/instructions/AddWithCarry.o obj/instructions/Subtract.o obj/instructions/SubtractYfromX.o obj/instructions/SubtractXfromY.o obj/instructions/ShiftLeft.o obj/instructions/ShiftRight.o obj/instructions/Random.o obj/main.o
+obj/instructions/SkipIfKeyPressed.o: instructions/SkipIfKeyPressed.cpp
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'instructions/SkipIfKeyPressed'
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 54):
+	@mkdir -p $(@D)	 
+	$(CC) $(CFLAGS) -o $@ $<
+
+tater-chip-8: obj/Chip8.o obj/Timer.o obj/SoundTimer.o obj/Chip8SdlWrapper.o obj/InstructionFactory.o obj/instructions/InstructionBase.o obj/instructions/ClearScreen.o obj/instructions/Display.o obj/instructions/Jump.o obj/instructions/SetReg.o obj/instructions/Add.o obj/instructions/SetIndex.o obj/instructions/Subroutine.o obj/instructions/SubroutineReturn.o obj/instructions/SkipIfXEqual.o obj/instructions/SkipIfXNotEqual.o obj/instructions/SkipIfXYEqual.o obj/instructions/SkipIfXYNotEqual.o obj/instructions/Set.o obj/instructions/BinaryOr.o obj/instructions/BinaryAnd.o obj/instructions/LogicalXor.o obj/instructions/AddWithCarry.o obj/instructions/Subtract.o obj/instructions/SubtractYfromX.o obj/instructions/SubtractXfromY.o obj/instructions/ShiftLeft.o obj/instructions/ShiftRight.o obj/instructions/Random.o obj/instructions/SkipIfKeyPressed.o obj/instructions/SkipIfKeyNotPressed.o obj/instructions/SetSoundTimer.o obj/instructions/SetXToDelayTimer.o obj/instructions/SetDelayTimerToX.o obj/main.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 46):
+#  recipe to execute (from 'Makefile', line 51):
 	$(CC) -o $@ $^ $(LDFLAGS) 
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-28 09:18:31.782140739
+#  Last modified 2021-11-28 13:06:08.2530301
 #  File has been updated.
 #  Successfully updated.
 
@@ -400,7 +418,7 @@ obj/instructions/SkipIfXNotEqual.o: instructions/SkipIfXNotEqual.cpp
 #  Implicit/static pattern stem: 'instructions/SkipIfXNotEqual'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -426,7 +444,7 @@ obj/instructions/SubtractXfromY.o: instructions/SubtractXfromY.cpp
 #  Implicit/static pattern stem: 'instructions/SubtractXfromY'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -448,12 +466,18 @@ instructions/BinaryAnd.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+instructions/InstructionBase.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 obj/instructions/Display.o: instructions/Display.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/Display'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -463,12 +487,21 @@ Chip8SdlWrapper.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+obj/instructions/SetDelayTimerToX.o: instructions/SetDelayTimerToX.cpp
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'instructions/SetDelayTimerToX'
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 54):
+	@mkdir -p $(@D)	 
+	$(CC) $(CFLAGS) -o $@ $<
+
 obj/instructions/Jump.o: instructions/Jump.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/Jump'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -477,7 +510,7 @@ obj/SoundTimer.o: SoundTimer.cpp
 #  Implicit/static pattern stem: 'SoundTimer'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -510,7 +543,7 @@ obj/instructions/Subroutine.o: instructions/Subroutine.cpp
 #  Implicit/static pattern stem: 'instructions/Subroutine'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -519,16 +552,17 @@ obj/instructions/Set.o: instructions/Set.cpp
 #  Implicit/static pattern stem: 'instructions/Set'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
+ 
 
 obj/instructions/InstructionBase.o: instructions/InstructionBase.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/InstructionBase'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -537,8 +571,7 @@ obj/instructions/ShiftLeft.o: instructions/ShiftLeft.cpp
 #  Implicit/static pattern stem: 'instructions/ShiftLeft'
 #  Modification time never checked.
 #  File has not been updated.
- 
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -555,6 +588,12 @@ instructions/Subtract.cpp:
 #  File has not been updated.
 
 # Not a target:
+instructions/SkipIfKeyNotPressed.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 instructions/ClearScreen.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -565,16 +604,22 @@ obj/Chip8SdlWrapper.o: Chip8SdlWrapper.cpp
 #  Implicit/static pattern stem: 'Chip8SdlWrapper'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
+
+# Not a target:
+instructions/SetSoundTimer.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 obj/instructions/SetIndex.o: instructions/SetIndex.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'instructions/SetIndex'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -582,7 +627,7 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 43):
+#  recipe to execute (from 'Makefile', line 48):
 	rm -f $(OBJS) $(APP)
 
 obj/instructions/Add.o: instructions/Add.cpp
@@ -590,7 +635,7 @@ obj/instructions/Add.o: instructions/Add.cpp
 #  Implicit/static pattern stem: 'instructions/Add'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -599,7 +644,7 @@ obj/instructions/SkipIfXEqual.o: instructions/SkipIfXEqual.cpp
 #  Implicit/static pattern stem: 'instructions/SkipIfXEqual'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -614,7 +659,7 @@ obj/instructions/SkipIfXYEqual.o: instructions/SkipIfXYEqual.cpp
 #  Implicit/static pattern stem: 'instructions/SkipIfXYEqual'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -635,7 +680,7 @@ obj/Chip8.o: Chip8.cpp
 #  Implicit/static pattern stem: 'Chip8'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -644,7 +689,7 @@ obj/instructions/BinaryAnd.o: instructions/BinaryAnd.cpp
 #  Implicit/static pattern stem: 'instructions/BinaryAnd'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -653,7 +698,7 @@ obj/instructions/SkipIfXYNotEqual.o: instructions/SkipIfXYNotEqual.cpp
 #  Implicit/static pattern stem: 'instructions/SkipIfXYNotEqual'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -670,6 +715,18 @@ instructions/SubroutineReturn.cpp:
 #  File has not been updated.
 
 # Not a target:
+instructions/SetDelayTimerToX.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+instructions/SetXToDelayTimer.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 instructions/SetReg.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -680,7 +737,7 @@ obj/instructions/LogicalXor.o: instructions/LogicalXor.cpp
 #  Implicit/static pattern stem: 'instructions/LogicalXor'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -690,12 +747,18 @@ instructions/ShiftRight.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+instructions/SkipIfKeyPressed.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 obj/InstructionFactory.o: InstructionFactory.cpp
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: 'InstructionFactory'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -710,7 +773,16 @@ obj/instructions/Subtract.o: instructions/Subtract.cpp
 #  Implicit/static pattern stem: 'instructions/Subtract'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
+	@mkdir -p $(@D)	 
+	$(CC) $(CFLAGS) -o $@ $<
+
+obj/instructions/SkipIfKeyNotPressed.o: instructions/SkipIfKeyNotPressed.cpp
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'instructions/SkipIfKeyNotPressed'
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
@@ -725,25 +797,24 @@ obj/instructions/ClearScreen.o: instructions/ClearScreen.cpp
 #  Implicit/static pattern stem: 'instructions/ClearScreen'
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 49):
+#  recipe to execute (from 'Makefile', line 54):
 	@mkdir -p $(@D)	 
 	$(CC) $(CFLAGS) -o $@ $<
 
 # files hash-table stats:
- 
-# Load=67/1024=7%, Rehash=0, Collisions=9/169=5%
+# Load=77/1024=8%, Rehash=0, Collisions=15/194=8%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 115 / storage = 2449 B / avg = 21 B
-# current buf: size = 8162 B / used = 2449 B / count = 115 / avg = 21 B
+# strcache buffers: 1 (0) / strings = 130 / storage = 2949 B / avg = 22 B
+# current buf: size = 8162 B / used = 2949 B / count = 130 / avg = 22 B
 
-# strcache performance: lookups = 189 / hit rate = 39%
+# strcache performance: lookups = 215 / hit rate = 39%
 # hash-table stats:
-# Load=115/8192=1%, Rehash=0, Collisions=1/189=1%
-# Finished Make data base on Sun Nov 28 09:18:56 2021
+# Load=130/8192=2%, Rehash=0, Collisions=1/215=0%
+# Finished Make data base on Sun Nov 28 13:07:09 2021
 
  

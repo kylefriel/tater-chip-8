@@ -43,17 +43,17 @@ void Display::Execute(Chip8* chip8)
             if (x < DISPLAY_WIDTH && y < DISPLAY_HEIGHT)
             {
                 if (isPixelOn)
-                {
-                    if (chip8->GetSdl().GetDisplayGrid()[x][y])
+                {                    
+                    if (chip8->GetSdl().GetGridPointState(x, y))
                     {
                         // display pixel is already on and sprite data is on so flip it
-                        chip8->GetSdl().GetDisplayGrid()[x][y] = false;
+                        chip8->GetSdl().SetGridPointState(x, y, false);
                         chip8->SetFlagReg(1);
                     }
                     else
                     {
-                        // turn on the pixel on
-                        chip8->GetSdl().GetDisplayGrid()[x][y] = true;
+                        // turn on the pixel on                        
+                        chip8->GetSdl().SetGridPointState(x, y, true);
                     }
                 }
             }

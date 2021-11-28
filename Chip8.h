@@ -60,6 +60,11 @@ class Chip8
         void PushStack(uint16_t d) {theStack.push(d);}
         uint16_t PopStack();
 
+        // timer accessors
+        uint8_t GetDelayTimerCounter() {return theDelayTimer.GetCounter();}        
+        void SetDelayTimerCounter(uint8_t t) {theDelayTimer.SetCounter(t);}        
+        void SetSoundTimerCounter(uint8_t t) {theSoundTimer.SetCounter(t);}        
+
     // protected methods here
     protected:
 

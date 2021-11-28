@@ -1,5 +1,4 @@
-#include <array>
-#include <vector>
+#include <map>
 #include <SDL.h>
 
 #ifndef _CHIP8DISPLAY_
@@ -20,8 +19,25 @@ class Chip8SdlWrapper
         bool Initialize();
         void Draw() {UpdateDisplay();}
         void ClearScreen();
+        void CheckForKeyboardEvents();
+        
+        bool GetGridPointState(uint8_t x, uint8_t y);
+        void SetGridPointState(uint8_t x, uint8_t y, bool state);
 
-        Chip8DisplayGrid& GetDisplayGrid() {return theDisplayGrid;}                    
+        // indicate whether or not the ESC key was pressed 
+        // which is how the user exits the emulator
+        bool EscKeyPressed();
+
+        // indicates whether one of the CHIP-8 4x4 input keys are pressed
+        // using the following layout:
+        //
+        // -----------------
+        // | 1 - 2 - 3 - 4 |
+        // | Q - W - E - R |
+        // | A - S - D - F |
+        // | Z - X - C - V |
+        // -----------------        
+        bool KeyPressed(uint8_t key);
 
     // protected methods here
     protected:        
@@ -35,6 +51,12 @@ class Chip8SdlWrapper
         SDL_Window* theWindow;
         SDL_Renderer* theRenderer;        
 
-        Chip8DisplayGrid theDisplayGrid;        
+        // map SDL keycodes to CHIP-8 input keys
+        std::map<uint8_t, SDL_Keycode> theKeyMap;
+
+        // list of keys that were in the pressed state during the last update
+        std::vector<SDL_Keycode> thePressedKeys;
+
+        Chip8DisplayGrid theDisplayGrid;                        
 };
 #endif

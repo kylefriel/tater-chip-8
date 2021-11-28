@@ -9,7 +9,7 @@ class SubroutineReturn: public InstructionBase
     public:
         SubroutineReturn();
 
-        virtual void Execute(Chip8* chip8);        \
+        virtual void Execute(Chip8* chip8);
         virtual std::string GetClassName() {return typeid(*this).name();};        
 };
 
