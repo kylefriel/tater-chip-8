@@ -33,11 +33,18 @@ SRC = Chip8.cpp \
       instructions/ShiftLeft.cpp \
       instructions/ShiftRight.cpp \
       instructions/Random.cpp \
+      instructions/JumpWithOffSet.cpp \
       instructions/SkipIfKeyPressed.cpp \
       instructions/SkipIfKeyNotPressed.cpp \
       instructions/SetSoundTimer.cpp \
       instructions/SetXToDelayTimer.cpp \
       instructions/SetDelayTimerToX.cpp \
+      instructions/AddToIndex.cpp \
+      instructions/GetKey.cpp \
+      instructions/SetIndexToFont.cpp \
+      instructions/StoreBinaryCodedDecimal.cpp \
+      instructions/StoreRegsInMemory.cpp \
+      instructions/LoadRegsFromMemory.cpp \
       main.cpp		
 
 OBJS = $(SRC:%.cpp=$(OBJDIR)/%.o)		

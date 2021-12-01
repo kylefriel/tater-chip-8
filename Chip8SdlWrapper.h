@@ -26,7 +26,7 @@ class Chip8SdlWrapper
 
         // indicate whether or not the ESC key was pressed 
         // which is how the user exits the emulator
-        bool EscKeyPressed();
+        bool EscKeyPressed() {return theEscKeyPressed;}
 
         // indicates whether one of the CHIP-8 4x4 input keys are pressed
         // using the following layout:
@@ -38,6 +38,8 @@ class Chip8SdlWrapper
         // | Z - X - C - V |
         // -----------------        
         bool KeyPressed(uint8_t key);
+        // return true if any key is pressed and set the reference to the key that was pressed
+        bool AnyKeyPressed(uint8_t &key);
 
     // protected methods here
     protected:        
@@ -52,10 +54,12 @@ class Chip8SdlWrapper
         SDL_Renderer* theRenderer;        
 
         // map SDL keycodes to CHIP-8 input keys
-        std::map<uint8_t, SDL_Keycode> theKeyMap;
+        std::map<SDL_Keycode, uint8_t> theKeyMap;
 
         // list of keys that were in the pressed state during the last update
-        std::vector<SDL_Keycode> thePressedKeys;
+        std::vector<uint8_t> thePressedKeys;
+
+        bool theEscKeyPressed;
 
         Chip8DisplayGrid theDisplayGrid;                        
 };

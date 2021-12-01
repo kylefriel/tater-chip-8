@@ -45,6 +45,18 @@ class InstructionFactory
         static std::shared_ptr<InstructionBase> Process8XY7(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process8XY6(const uint16_t opcode);
         static std::shared_ptr<InstructionBase> Process8XYE(const uint16_t opcode);
+
+        static std::map<uint16_t, InstructionCreateFunc> theFxMap;
+        static std::shared_ptr<InstructionBase> ProcessFX07(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> ProcessFX15(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> ProcessFX18(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> ProcessFX1E(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> ProcessFX0A(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> ProcessFX29(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> ProcessFX33(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> ProcessFX55(const uint16_t opcode);
+        static std::shared_ptr<InstructionBase> ProcessFX65(const uint16_t opcode);
+        
 };
 
 #endif

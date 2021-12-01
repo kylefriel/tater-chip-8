@@ -11,10 +11,11 @@
 #ifndef _CHIP8_
 #define _CHIP8_
 
-#define MEM_SIZE     0x1000
-#define PROGAM_START 0x0200
-#define FONTS_SIZE   0x0050
-#define FONTS_START  0x0050
+#define MEM_SIZE       0x1000
+#define PROGAM_START   0x0200
+#define FONTS_SIZE     0x0050
+#define FONTS_START    0x0050
+#define FONT_SIZE_EACH 0x0005
 
 #define NUM_VARIABLE_REGISTERS 0x10
 
@@ -37,8 +38,8 @@ class Chip8
         Chip8SdlWrapper& GetSdl() {return theSdlWrapper;}
 
         // get and set variable registers
-        uint8_t GetVReg(uint16_t r);
-        void SetVReg(uint16_t r, uint8_t v);
+        uint8_t GetVReg(uint8_t r);
+        void SetVReg(uint8_t r, uint8_t v);
 
         // get and set index register
         uint16_t GetIReg() {return theIndexRegister;}
@@ -52,9 +53,11 @@ class Chip8
         void SetPc(uint16_t pc) {theProgramCounter = pc;}
         uint16_t GetPc() {return theProgramCounter;}
         void MovePcToNextInstruction() {theProgramCounter += 2;}
+        void MovePcToLastInstruction() {theProgramCounter -= 2;}
 
         // get memory at an address
         uint8_t GetMemory(uint16_t address);                
+        void SetMemory(uint16_t address, uint8_t value);
 
         // stack accessors
         void PushStack(uint16_t d) {theStack.push(d);}
@@ -63,7 +66,9 @@ class Chip8
         // timer accessors
         uint8_t GetDelayTimerCounter() {return theDelayTimer.GetCounter();}        
         void SetDelayTimerCounter(uint8_t t) {theDelayTimer.SetCounter(t);}        
-        void SetSoundTimerCounter(uint8_t t) {theSoundTimer.SetCounter(t);}        
+        void SetSoundTimerCounter(uint8_t t) {theSoundTimer.SetCounter(t);}    
+
+        uint16_t GetFontIndex(uint8_t x) {return FONTS_START + (FONT_SIZE_EACH * (x & 0xf));}
 
     // protected methods here
     protected:

@@ -21,21 +21,29 @@
 #include "instructions/SubtractXfromY.h"
 #include "instructions/ShiftLeft.h"
 #include "instructions/ShiftRight.h"
+#include "instructions/JumpWithOffSet.h"
 #include "instructions/Random.h"
 #include "instructions/SkipIfKeyPressed.h"
 #include "instructions/SkipIfKeyNotPressed.h"
 #include "instructions/SetSoundTimer.h"
 #include "instructions/SetXToDelayTimer.h"
 #include "instructions/SetDelayTimerToX.h"
+#include "instructions/AddToIndex.h"
+#include "instructions/GetKey.h"
+#include "instructions/SetIndexToFont.h"
+#include "instructions/StoreBinaryCodedDecimal.h"
+#include "instructions/StoreRegsInMemory.h"
+#include "instructions/LoadRegsFromMemory.h"
 #include "InstructionFactory.h"
 
 std::map<uint16_t, InstructionFactory::InstructionCreateFunc> InstructionFactory::theFirstNibbleMap;
 std::map<uint16_t, InstructionFactory::InstructionCreateFunc> InstructionFactory::theLogicalOperationsMap;
+std::map<uint16_t, InstructionFactory::InstructionCreateFunc> InstructionFactory::theFxMap;
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 InstructionFactory::InstructionFactory()
 {    
-    // populate the map of first nibble of the opcodes to the function pointers 
+    // populate the map with first nibble of the opcodes to the function pointers 
     if (theFirstNibbleMap.empty())   
     {
         theFirstNibbleMap.emplace(0x0, InstructionFactory::Process0);
@@ -56,7 +64,7 @@ InstructionFactory::InstructionFactory()
         theFirstNibbleMap.emplace(0xF, InstructionFactory::ProcessF);        
     }
 
-    // populate the map of fourth nibble of the logical operations opcodes to the function pointers
+    // populate the map with the fourth nibble of the logical operations opcodes to the function pointers
     if (theLogicalOperationsMap.empty())
     {
         theLogicalOperationsMap.emplace(0x0, InstructionFactory::Process8XY0);
@@ -69,6 +77,21 @@ InstructionFactory::InstructionFactory()
         theLogicalOperationsMap.emplace(0x7, InstructionFactory::Process8XY7);    
         theLogicalOperationsMap.emplace(0xE, InstructionFactory::Process8XYE);    
     }
+
+
+    // populate the map with the LS byte of the logical operations opcodes to the function pointers
+    if (theFxMap.empty())
+    {
+        theLogicalOperationsMap.emplace(0x07, InstructionFactory::ProcessFX07);
+        theLogicalOperationsMap.emplace(0x15, InstructionFactory::ProcessFX15);
+        theLogicalOperationsMap.emplace(0x18, InstructionFactory::ProcessFX18);
+        theLogicalOperationsMap.emplace(0x1E, InstructionFactory::ProcessFX1E);
+        theLogicalOperationsMap.emplace(0x0A, InstructionFactory::ProcessFX0A);
+        theLogicalOperationsMap.emplace(0x29, InstructionFactory::ProcessFX29);    
+        theLogicalOperationsMap.emplace(0x33, InstructionFactory::ProcessFX33);    
+        theLogicalOperationsMap.emplace(0x55, InstructionFactory::ProcessFX55);    
+        theLogicalOperationsMap.emplace(0x65, InstructionFactory::ProcessFX65);    
+    }    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -179,7 +202,7 @@ std::shared_ptr<InstructionBase> InstructionFactory::ProcessA(const uint16_t opc
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::ProcessB(const uint16_t opcode)
 {
-    return 0;
+    return std::shared_ptr<InstructionBase>(new JumpWithOffSet(opcode));    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -217,19 +240,12 @@ std::shared_ptr<InstructionBase> InstructionFactory::ProcessE(const uint16_t opc
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::ProcessF(const uint16_t opcode)
 {
-    if (0x07 == LS_BYTE(opcode))
+    std::map<uint16_t, InstructionCreateFunc>::iterator it = theFxMap.find(LS_BYTE(opcode));
+    if (it != theFxMap.end())
     {        
-        return (std::shared_ptr<InstructionBase>(new SetXToDelayTimer(opcode)));
+        return ((*it->second)(opcode));
     }
-    else if (0x15 == LS_BYTE(opcode))
-    {        
-        return (std::shared_ptr<InstructionBase>(new SetDelayTimerToX(opcode)));
-    }
-    else if (0x18 == LS_BYTE(opcode))
-    {        
-        return (std::shared_ptr<InstructionBase>(new SetSoundTimer(opcode)));
-    }
-    
+
     return 0;
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -294,5 +310,69 @@ std::shared_ptr<InstructionBase> InstructionFactory::Process8XY6(const uint16_t 
 std::shared_ptr<InstructionBase> InstructionFactory::Process8XYE(const uint16_t opcode)
 {
     return std::shared_ptr<InstructionBase>(new ShiftRight(opcode));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX07(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new SetXToDelayTimer(opcode)));
+
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX15(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new SetDelayTimerToX(opcode)));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX18(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new SetSoundTimer(opcode)));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX1E(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new AddToIndex(opcode)));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX0A(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new GetKey(opcode)));
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX29(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new SetIndexToFont(opcode)));    
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX33(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new StoreBinaryCodedDecimal(opcode)));    
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX55(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new LoadRegsFromMemory(opcode)));    
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX65(const uint16_t opcode)
+{
+    return (std::shared_ptr<InstructionBase>(new StoreRegsInMemory(opcode)));    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

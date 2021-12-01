@@ -3,26 +3,29 @@
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8SdlWrapper::Chip8SdlWrapper()
+    :theEscKeyPressed(false),
+     theWindow(0),
+     theRenderer(0)
 {   
     //theDisplayGrid = {false}; 
     memset(theDisplayGrid, 0, sizeof(theDisplayGrid));
 
-    theKeyMap.emplace(0x1, SDLK_1);
-    theKeyMap.emplace(0x2, SDLK_2);
-    theKeyMap.emplace(0x3, SDLK_3);
-    theKeyMap.emplace(0xC, SDLK_4);
-    theKeyMap.emplace(0x4, SDLK_q);
-    theKeyMap.emplace(0x5, SDLK_w);
-    theKeyMap.emplace(0x6, SDLK_e);
-    theKeyMap.emplace(0xD, SDLK_r);
-    theKeyMap.emplace(0x7, SDLK_a);
-    theKeyMap.emplace(0x8, SDLK_s);
-    theKeyMap.emplace(0x9, SDLK_d);
-    theKeyMap.emplace(0xE, SDLK_f);
-    theKeyMap.emplace(0xA, SDLK_z);
-    theKeyMap.emplace(0x0, SDLK_x);
-    theKeyMap.emplace(0xB, SDLK_c);
-    theKeyMap.emplace(0xF, SDLK_m);
+    theKeyMap.emplace(SDLK_1, 0x1);
+    theKeyMap.emplace(SDLK_2, 0x2);
+    theKeyMap.emplace(SDLK_3, 0x3);
+    theKeyMap.emplace(SDLK_4, 0xC);
+    theKeyMap.emplace(SDLK_q, 0x4);
+    theKeyMap.emplace(SDLK_w, 0x5);
+    theKeyMap.emplace(SDLK_e, 0x6);
+    theKeyMap.emplace(SDLK_r, 0xD);
+    theKeyMap.emplace(SDLK_a, 0x7);
+    theKeyMap.emplace(SDLK_s, 0x8);
+    theKeyMap.emplace(SDLK_d, 0x9);
+    theKeyMap.emplace(SDLK_f, 0xE);
+    theKeyMap.emplace(SDLK_z, 0xA);
+    theKeyMap.emplace(SDLK_x, 0x0);
+    theKeyMap.emplace(SDLK_c, 0xB);
+    theKeyMap.emplace(SDLK_v, 0xF);
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -133,7 +136,6 @@ void Chip8SdlWrapper::SetGridPointState(uint8_t x, uint8_t y, bool state)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8SdlWrapper::CheckForKeyboardEvents()
 {
-
     thePressedKeys.clear();
 
     SDL_Event event;
@@ -142,32 +144,41 @@ void Chip8SdlWrapper::CheckForKeyboardEvents()
     {
         if (SDL_KEYDOWN == event.type)
         {
-            thePressedKeys.push_back(event.key.keysym.sym);
-            printf ("%d was pressed!\n", event.key.keysym.sym);
+            theEscKeyPressed = (SDLK_ESCAPE == event.key.keysym.sym) ? true : false;
+
+            std::map<SDL_Keycode, uint8_t>::iterator it = theKeyMap.find(event.key.keysym.sym);
+            if (it != theKeyMap.end())
+            {        
+                thePressedKeys.push_back(theKeyMap[event.key.keysym.sym]);
+                printf ("%x was pressed!\n", theKeyMap[event.key.keysym.sym]);
+            }                        
         }
     }
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-bool Chip8SdlWrapper::EscKeyPressed()
-{
-    if (std::find(thePressedKeys.begin(), thePressedKeys.end(), SDLK_ESCAPE) != thePressedKeys.end())
-    {
-        return true;
-    }
-
-    return false;
-}
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 bool Chip8SdlWrapper::KeyPressed(uint8_t key)
 {
     bool ret = false;
-    if (std::find(thePressedKeys.begin(), thePressedKeys.end(), theKeyMap[key]) != thePressedKeys.end())
+    if (std::find(thePressedKeys.begin(), thePressedKeys.end(), key) != thePressedKeys.end())
     {
         ret = true;
     }    
 
     return ret;
 }
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+bool Chip8SdlWrapper::AnyKeyPressed(uint8_t &key)
+{
+    if (!thePressedKeys.empty())    
+    {
+        key = thePressedKeys.at(0);
+        return true;
+    }
+    
+    return false;
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
