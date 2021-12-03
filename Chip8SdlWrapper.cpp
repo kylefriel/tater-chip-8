@@ -1,11 +1,16 @@
 #include <algorithm>
+#include <string>
 #include "Chip8SdlWrapper.h"
+
+const std::string SOUND_FILE = "./sound/chip8.wav";
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8SdlWrapper::Chip8SdlWrapper()
     :theEscKeyPressed(false),
      theWindow(0),
-     theRenderer(0)
+     theRenderer(0),
+     theWavBuffer(0),
+     theAudioDevice(0)
 {   
     //theDisplayGrid = {false}; 
     memset(theDisplayGrid, 0, sizeof(theDisplayGrid));
@@ -33,6 +38,10 @@ Chip8SdlWrapper::Chip8SdlWrapper()
 Chip8SdlWrapper::~Chip8SdlWrapper()
 {    
     SDL_DestroyWindow(theWindow);
+
+    SDL_CloseAudioDevice(theAudioDevice);
+    SDL_FreeWAV(theWavBuffer);
+    
     SDL_Quit();
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,7 +60,26 @@ bool Chip8SdlWrapper::Initialize()
                                  0);
     theRenderer = SDL_CreateRenderer(theWindow, -1, SDL_RENDERER_SOFTWARE);
     SDL_RenderSetScale(theRenderer, PIXEL_SCALE_FACTOR, PIXEL_SCALE_FACTOR);
-   
+
+
+    // load the sound file
+    if (0 == SDL_LoadWAV(SOUND_FILE.c_str(), &theWavSpec, &theWavBuffer, &theWavLength))
+    {
+        return false;            
+    }
+
+    theAudioDevice = SDL_OpenAudioDevice(0, 0, &theWavSpec, 0, 0);
+
+    if (0 == theAudioDevice)
+    {
+        return false;
+    }
+
+    if (0 != SDL_QueueAudio(theAudioDevice, theWavBuffer, theWavLength))
+    {
+        return false;
+    }
+    
     return true;
 }
 
@@ -191,5 +219,12 @@ bool Chip8SdlWrapper::AnyKeyPressed(uint8_t &key)
     }
     
     return false;
+}
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+void Chip8SdlWrapper::PlaySound(bool paused)
+{    
+    SDL_PauseAudioDevice(theAudioDevice, paused);
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -41,6 +41,8 @@ class Chip8SdlWrapper
         // return true if any key is pressed and set the reference to the key that was pressed
         bool AnyKeyPressed(uint8_t &key);
 
+        void PlaySound(bool paused);
+
     // protected methods here
     protected:        
 
@@ -60,6 +62,12 @@ class Chip8SdlWrapper
         std::vector<uint8_t> thePressedKeys;
 
         bool theEscKeyPressed;
+
+        // sound stuff
+        SDL_AudioSpec theWavSpec;
+        SDL_AudioDeviceID theAudioDevice;
+        uint32_t theWavLength;
+        uint8_t* theWavBuffer;         
 
         Chip8DisplayGrid theDisplayGrid;                        
 };

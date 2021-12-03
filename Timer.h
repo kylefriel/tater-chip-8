@@ -4,6 +4,8 @@
 #ifndef _TIMER_
 #define _TIMER_
 
+class Chip8;
+
 class Timer
 {        
     public:
@@ -15,7 +17,7 @@ class Timer
 
         Timer();
 
-        void Run();
+        void Run(Chip8* chip8);
 
         uint8_t GetCounter() const {return theCounter;}
         void SetCounter(const uint8_t c) {theCounter = c;}
@@ -23,7 +25,12 @@ class Timer
     // protected methods here
     protected:        
 
-        virtual void ChildRun() {};
+        virtual void ChildRun(Chip8* chip8) {};
+
+    // protected members here
+    protected:        
+
+        uint8_t theCounter;
 
     // private methods here
     private:
@@ -34,8 +41,6 @@ class Timer
     private:
         
         timepoint theLastTimePoint;
-        nanosecs  theElaspedTimeSinceLastDecrement;
-
-        uint8_t theCounter;
+        nanosecs  theElaspedTimeSinceLastDecrement;        
 };
 #endif

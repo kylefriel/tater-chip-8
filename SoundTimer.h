@@ -3,6 +3,8 @@
 #ifndef _SOUNDTIMER_
 #define _SOUNDTIMER_
 
+class Chip8;
+
 class SoundTimer : public Timer
 {
     public:
@@ -12,6 +14,6 @@ class SoundTimer : public Timer
     // protected methods here
     protected:        
 
-        virtual void ChildRun();
+        virtual void ChildRun(Chip8* chip8);
 };
 #endif

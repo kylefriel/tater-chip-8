@@ -6,7 +6,7 @@
 #include "Chip8.h"
 #include "instructions/InstructionBase.h"
 
-const std::chrono::milliseconds default_sleep_time_ms(2); // default is 2ms
+const std::chrono::milliseconds default_sleep_time_ms(3); // default is 3ms
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8()
@@ -51,7 +51,7 @@ void Chip8::Execute()
 {            
     if (!theSdlWrapper.Initialize())
     {
-        printf ("failed to initialize graphics\n");
+        printf ("failed to initialize SDL\n");
         return;
     }          
 
@@ -83,8 +83,8 @@ void Chip8::Execute()
         // the next instruction
         std::this_thread::sleep_for(theBetweenInstructionWaitTimeMs);                
 
-        theDelayTimer.Run();
-        theSoundTimer.Run();        
+        theDelayTimer.Run(this);
+        theSoundTimer.Run(this);        
     }
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
