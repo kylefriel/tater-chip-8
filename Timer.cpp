@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "Timer.h"
 
 const int64_t SIXTY_HERTZ_IN_NS = 16666667;
@@ -23,17 +24,17 @@ void Timer::Decrement()
 {
     if (theCounter > 0)
     {
-        const int64_t SIXTY_HERTZ_IN_NS = 16666667;
+        const int64_t SIXTY_HERTZ_IN_MS = 17;
         using namespace std::chrono;
         timepoint now = steady_clock::now();    
-        nanoseconds elaspedTimeNs = duration_cast<nanoseconds>(now - theLastTimePoint);
+        milliseconds elaspedTimeMs = duration_cast<milliseconds>(now - theLastTimePoint);
 
-        if (nanoseconds(SIXTY_HERTZ_IN_NS) <= elaspedTimeNs)    
+        if (nanoseconds(SIXTY_HERTZ_IN_MS) <= elaspedTimeMs)    
         {
-            theCounter--;
+            theCounter--;            
         }
 
-        theLastTimePoint = now;
+        theLastTimePoint = steady_clock::now();
     }    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
