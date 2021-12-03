@@ -6,7 +6,7 @@
 #include "Chip8.h"
 #include "instructions/InstructionBase.h"
 
-const std::chrono::milliseconds default_sleep_time_ms(5); // default is 2ms
+const std::chrono::milliseconds default_sleep_time_ms(2); // default is 2ms
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8()
@@ -40,13 +40,6 @@ bool Chip8::LoadFromFile(std::string file)
     }
 
     f.read(reinterpret_cast<char*>(theMemory.data() + PROGAM_START), theMemory.size() - PROGAM_START);
-    
-    // for (int i = 0 ; i < theMemory.size() ; i+=2)
-    // {        
-    //     if (0 != theMemory[i] || 0 != theMemory[i+1])
-    //         printf ("i=%x: %02x%02x\n", i, theMemory[i], theMemory[i+1]);
-    // }    
-    
     f.close();    
 
     return true;
@@ -82,7 +75,7 @@ void Chip8::Execute()
 
         if (0 != instruction)
         {            
-            std::cout << "opcode=" << std::hex << opcode << " Executing " + instruction->GetClassName() << std::endl;
+            //std::cout << "opcode=" << std::hex << opcode << " Executing " + instruction->GetClassName() << std::endl;
             instruction->Execute(this);            
         }        
 
