@@ -46,8 +46,8 @@ class Chip8
         void SetIReg(uint16_t v) {theIndexRegister = v;}
 
         // get and set the flag register
-        uint16_t GetFlagReg() {return theFlagRegister;}
-        void SetFlagReg(uint16_t v) {theFlagRegister = v;}
+        uint16_t GetFlagReg() {return GetVReg(0xF);}
+        void SetFlagReg(uint16_t v) {SetVReg(0xF, v);}
 
         // program counter accessors
         void SetPc(uint16_t pc) {theProgramCounter = pc;}
@@ -85,8 +85,7 @@ class Chip8
         std::stack<uint16_t> theStack;
         uint16_t theProgramCounter;
         uint16_t theIndexRegister;        
-        std::array <uint8_t, NUM_VARIABLE_REGISTERS> theVariableRegisters;
-        uint16_t theFlagRegister;
+        std::array <uint8_t, NUM_VARIABLE_REGISTERS> theVariableRegisters;    
         std::array <uint8_t, MEM_SIZE> theMemory;        
 
         // amount of time to sleep (in milliseconds) before executing the next instruction

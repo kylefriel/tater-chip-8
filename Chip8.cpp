@@ -11,8 +11,7 @@ const std::chrono::milliseconds default_sleep_time_ms(5); // default is 2ms
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8()
     :theBetweenInstructionWaitTimeMs(default_sleep_time_ms),
-     theProgramCounter(PROGAM_START),
-     theFlagRegister(0)
+     theProgramCounter(PROGAM_START)
 {
     std::fill(std::begin(theVariableRegisters), std::end(theVariableRegisters), 0);
     InitializeMemory();
@@ -22,8 +21,7 @@ Chip8::Chip8()
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8(uint16_t sleepTimeMs)
     :theBetweenInstructionWaitTimeMs(sleepTimeMs),
-     theProgramCounter(PROGAM_START),
-     theFlagRegister(0)
+     theProgramCounter(PROGAM_START)
 {
     std::fill(std::begin(theVariableRegisters), std::end(theVariableRegisters), 0);
     InitializeMemory();
