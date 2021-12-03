@@ -6,7 +6,7 @@
 #include "Chip8.h"
 #include "instructions/InstructionBase.h"
 
-const std::chrono::milliseconds default_sleep_time_ms(2); // default is 2ms
+const std::chrono::milliseconds default_sleep_time_ms(5); // default is 2ms
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Chip8::Chip8()
@@ -65,7 +65,15 @@ void Chip8::Execute()
     }          
 
     while (true && theProgramCounter < theMemory.size())
-    {            
+    {    
+        theSdlWrapper.CheckForKeyboardEvents();
+
+        // see if the user wants to exit
+        if (theSdlWrapper.EscKeyPressed())
+        {            
+            break;
+        }
+
         // get the next instruction and increment the program counter
         uint16_t opcode = (theMemory[theProgramCounter] << 8) | theMemory[theProgramCounter+1];        
         // increment to the next instruction for he next loop
@@ -76,21 +84,13 @@ void Chip8::Execute()
 
         if (0 != instruction)
         {            
-            std::cout << "opcode=" << std::hex << opcode << " Executing " + instruction->GetClassName() << std::endl;
+            //std::cout << "opcode=" << std::hex << opcode << " Executing " + instruction->GetClassName() << std::endl;
             instruction->Execute(this);            
-        }
+        }        
 
         // sleep for some number of milliseconds before attempting to execute 
         // the next instruction
-        std::this_thread::sleep_for(theBetweenInstructionWaitTimeMs);
-
-        theSdlWrapper.CheckForKeyboardEvents();
-
-        // see if the user wants to exit
-        if (theSdlWrapper.EscKeyPressed())
-        {            
-            break;
-        }
+        std::this_thread::sleep_for(theBetweenInstructionWaitTimeMs);                
 
         theDelayTimer.Run();
         theSoundTimer.Run();        

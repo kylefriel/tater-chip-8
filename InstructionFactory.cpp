@@ -82,15 +82,15 @@ InstructionFactory::InstructionFactory()
     // populate the map with the LS byte of the logical operations opcodes to the function pointers
     if (theFxMap.empty())
     {
-        theLogicalOperationsMap.emplace(0x07, InstructionFactory::ProcessFX07);
-        theLogicalOperationsMap.emplace(0x15, InstructionFactory::ProcessFX15);
-        theLogicalOperationsMap.emplace(0x18, InstructionFactory::ProcessFX18);
-        theLogicalOperationsMap.emplace(0x1E, InstructionFactory::ProcessFX1E);
-        theLogicalOperationsMap.emplace(0x0A, InstructionFactory::ProcessFX0A);
-        theLogicalOperationsMap.emplace(0x29, InstructionFactory::ProcessFX29);    
-        theLogicalOperationsMap.emplace(0x33, InstructionFactory::ProcessFX33);    
-        theLogicalOperationsMap.emplace(0x55, InstructionFactory::ProcessFX55);    
-        theLogicalOperationsMap.emplace(0x65, InstructionFactory::ProcessFX65);    
+        theFxMap.emplace(0x07, InstructionFactory::ProcessFX07);
+        theFxMap.emplace(0x15, InstructionFactory::ProcessFX15);
+        theFxMap.emplace(0x18, InstructionFactory::ProcessFX18);
+        theFxMap.emplace(0x1E, InstructionFactory::ProcessFX1E);
+        theFxMap.emplace(0x0A, InstructionFactory::ProcessFX0A);
+        theFxMap.emplace(0x29, InstructionFactory::ProcessFX29);    
+        theFxMap.emplace(0x33, InstructionFactory::ProcessFX33);    
+        theFxMap.emplace(0x55, InstructionFactory::ProcessFX55);    
+        theFxMap.emplace(0x65, InstructionFactory::ProcessFX65);    
     }    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -302,14 +302,14 @@ std::shared_ptr<InstructionBase> InstructionFactory::Process8XY7(const uint16_t 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::Process8XY6(const uint16_t opcode)
 {
-    return std::shared_ptr<InstructionBase>(new ShiftLeft(opcode));
+    return std::shared_ptr<InstructionBase>(new ShiftRight(opcode));
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::Process8XYE(const uint16_t opcode)
 {
-    return std::shared_ptr<InstructionBase>(new ShiftRight(opcode));
+    return std::shared_ptr<InstructionBase>(new ShiftLeft(opcode));    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -317,7 +317,6 @@ std::shared_ptr<InstructionBase> InstructionFactory::Process8XYE(const uint16_t 
 std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX07(const uint16_t opcode)
 {
     return (std::shared_ptr<InstructionBase>(new SetXToDelayTimer(opcode)));
-
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -365,14 +364,14 @@ std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX33(const uint16_t 
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX55(const uint16_t opcode)
-{
-    return (std::shared_ptr<InstructionBase>(new LoadRegsFromMemory(opcode)));    
+{    
+    return (std::shared_ptr<InstructionBase>(new StoreRegsInMemory(opcode)));    
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::shared_ptr<InstructionBase> InstructionFactory::ProcessFX65(const uint16_t opcode)
 {
-    return (std::shared_ptr<InstructionBase>(new StoreRegsInMemory(opcode)));    
+    return (std::shared_ptr<InstructionBase>(new LoadRegsFromMemory(opcode)));       
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
