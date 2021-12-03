@@ -12,6 +12,7 @@ Add::Add(uint16_t opcode)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Add::Execute(Chip8* chip8)
 {    
-    chip8->SetVReg(theReg, chip8->GetVReg(theReg) + theValue);
+    uint8_t initRegValue = chip8->GetVReg(theReg);
+    chip8->SetVReg(theReg, initRegValue + theValue);
 }
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

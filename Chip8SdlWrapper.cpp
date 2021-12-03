@@ -136,7 +136,7 @@ void Chip8SdlWrapper::SetGridPointState(uint8_t x, uint8_t y, bool state)
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Chip8SdlWrapper::CheckForKeyboardEvents()
 {
-    thePressedKeys.clear();
+    //thePressedKeys.clear();
 
     SDL_Event event;
 
@@ -149,9 +149,20 @@ void Chip8SdlWrapper::CheckForKeyboardEvents()
             std::map<SDL_Keycode, uint8_t>::iterator it = theKeyMap.find(event.key.keysym.sym);
             if (it != theKeyMap.end())
             {        
-                thePressedKeys.push_back(theKeyMap[event.key.keysym.sym]);
-                printf ("%x was pressed!\n", theKeyMap[event.key.keysym.sym]);
+                thePressedKeys.push_back(theKeyMap[event.key.keysym.sym]);                
             }                        
+        }
+        else if (SDL_KEYUP)
+        {
+            std::map<SDL_Keycode, uint8_t>::iterator it = theKeyMap.find(event.key.keysym.sym);
+            if (it != theKeyMap.end())
+            {        
+                std::vector<uint8_t>::iterator pos = std::find(thePressedKeys.begin(), thePressedKeys.end(), theKeyMap[event.key.keysym.sym]);
+                if (pos != thePressedKeys.end())
+                {
+                    thePressedKeys.erase(pos);
+                }                            
+            }        
         }
     }
 }

@@ -84,7 +84,7 @@ void Chip8::Execute()
 
         if (0 != instruction)
         {            
-            //std::cout << "opcode=" << std::hex << opcode << " Executing " + instruction->GetClassName() << std::endl;
+            std::cout << "opcode=" << std::hex << opcode << " Executing " + instruction->GetClassName() << std::endl;
             instruction->Execute(this);            
         }        
 
